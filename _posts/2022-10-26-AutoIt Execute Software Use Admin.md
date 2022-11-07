@@ -6,7 +6,7 @@ categories: [Windows ,AutoIT]
 tags: [AutoIT]
 
 ---
-<script>
+<script  type='text/javascript' src=''>
       #include <MsgBoxConstants.au3>
       #include <WinAPIFiles.au3>
 

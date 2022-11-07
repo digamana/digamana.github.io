@@ -13,7 +13,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 前置作業  
  1.建議新增統一放置Config的資料夾，並在其中加入新的cs檔 
 例如NewDataSheetConfig.cs  
-<script>
+<script  type='text/javascript' src=''>
 
       namespace CodeFirst.Config
       {
@@ -33,7 +33,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 2.變更Model1.cs底下的OnModelCreating的寫法  
 更改前  
-<script>
+<script  type='text/javascript' src=''>
       using System.Data.Entity;
 
       namespace CodeFirst
@@ -62,7 +62,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 
 更改後
-<script>
+<script  type='text/javascript' src=''>
       using System.Data.Entity;
 
       namespace CodeFirst
@@ -95,7 +95,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 3.設定所需變更的資料  
 例如我希望Name的資料型態長度是20
-<script>
+<script  type='text/javascript' src=''>
 
       namespace CodeFirst.Config
       {
@@ -110,7 +110,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
       }
 
 然後Add-Migration  
-<script>
+<script  type='text/javascript' src=''>
 
      Add-Migration SetMaxLength
 
@@ -119,7 +119,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/2.png){: width="600" height="500" }
 
 並執行更新  
-<script>
+<script  type='text/javascript' src=''>
 
      Update-Database
 
@@ -134,7 +134,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 !!!還原Migration版本的方式!!!  
 !!!但是不建議如次操作，因為修改後若要Update，會遺失中間的Migration留存紀錄  
  
- <script>
+ <script  type='text/javascript' src=''>
 
      Update-Database -TargetMigration: OddDataSheetReNameNameTo_Name
 
@@ -145,48 +145,48 @@ OddDataSheetReNameNameTo_Name為Migrations資料夾底下的檔名
 
 以下是可以參考的指令  
 變更TableName↓
-<script>
+<script  type='text/javascript' src=''>
 
      ToTable("NewDataSheet","Hellow")
 
 配置主鍵↓
-<script>
+<script  type='text/javascript' src=''>
 
      HasKey(t=>t.Name);
 
 配置複合鍵↓
-<script>
+<script  type='text/javascript' src=''>
 
      HasKey(t=>new{t.id , t.Name});
 
 
 變更藍位名稱↓
-<script>
+<script  type='text/javascript' src=''>
 
      Property(t => t.Name).HasColumnName("sName");
 
 
 變更欄位型態↓
-<script>
+<script  type='text/javascript' src=''>
 
      Property(t => t.Name).HasColumnType("varchar");
 
 
 不使用Visual Studio中生成的資料表設定，而是直接使用已存在於資料庫的欄位設定
-<script>
+<script  type='text/javascript' src=''>
 
      Property(t => t.Name).HasDatabaseGenerated(DatabaseGeneratedOption.None)
 
 
 　
 Not Null設定
-<script>
+<script  type='text/javascript' src=''>
 
      Property(t=>t.Name).IsRequired();
 
 
 變更字串長度↓
-<script>
+<script  type='text/javascript' src=''>
 
      .Property(t=>t.Name).HasMaxLength(255);
 

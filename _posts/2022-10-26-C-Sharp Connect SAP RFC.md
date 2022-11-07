@@ -13,20 +13,20 @@ tags: [C#,.Net Framework,Winform]
 使用套件  
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/1.png){: width="600" height="500" }
 SAPDotNetConnector3：
-<script>
+<script  type='text/javascript' src=''>
 
     NuGet\Install-Package SAPDotNetConnector3 -Version 0.3.0
 
 
 sapnco3.x64：
-<script>
+<script  type='text/javascript' src=''>
 
     NuGet\Install-Package sapnco3.x64 -Version 3.0.2
 
 
 
 核心Source Code :  
-<script>
+<script  type='text/javascript' src=''>
 
            RfcConfigParameters argsP = new RfcConfigParameters();
             argsP.Add(RfcConfigParameters.Name, "Your_Name");

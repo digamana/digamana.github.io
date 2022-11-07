@@ -13,7 +13,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/1.png){: width="600" height="500" }
   
 [DemoDB]是我用來DEMO的資料庫名稱
-<script>
+<script  type='text/javascript' src=''>
 
      USE [DemoDB]
     GO

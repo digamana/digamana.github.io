@@ -10,7 +10,7 @@ tags: [AutoIT]
 將公司的PPT模板放置在網路路徑上
 然後透過這個Exe來Copy預設模板，並蓋掉User本機PPT預設模板
 備註：須將檔案放置在 C:\Users\AppData\Roaming\Microsoft\Templates　　底下，且檔名需要改成blank.potx
-<script>
+<script  type='text/javascript' src=''>
       #Include <EditConstants.au3>
       #Include <GUIConstantsEx.au3>
 

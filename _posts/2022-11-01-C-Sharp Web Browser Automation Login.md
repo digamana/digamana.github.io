@@ -9,19 +9,19 @@ tags: [C#]
 首先需要安裝套件  
 ![Desktop View](/assets/img/2022-11-01-C-Sharp Web Browser Automation Login/1.png){: width="600" height="500" }  
 其一：Selenium.WebDriver
-<script>
+<script  type='text/javascript' src=''>
 
      NuGet\Install-Package Selenium.WebDriver -Version 4.5.1
 
 其二：Selenium.WebDriver.ChromeDriver ( 版本需依據本地Chrome的版本微調)
-<script>
+<script  type='text/javascript' src=''>
 
      NuGet\Install-Package Selenium.WebDriver.ChromeDriver -Version 106.0.5249.6100
 
  
 以登入Netflix為例
 使用以下範例
-<script>
+<script  type='text/javascript' src=''>
 
       using OpenQA.Selenium;
       using OpenQA.Selenium.Chrome;

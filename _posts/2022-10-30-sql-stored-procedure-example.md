@@ -6,7 +6,7 @@ categories: [Other ,SQL]
 tags: [SQL]
 ---
 建立Store Procedure
-<script>
+<script  type='text/javascript' src=''>
         USE [DemoDB]
         GO
 
@@ -43,7 +43,7 @@ tags: [SQL]
 不特別處理的話會Search " "或Null  
 通常使用操作上如果不輸入數值,通常會希望將資料全部帶出來
 Select的部分改成如下
-<script>
+<script  type='text/javascript' src=''>
  
     FROM [dbo].[Member]
     where

@@ -10,7 +10,7 @@ tags: [SQL]
 ![Desktop View](/assets/img/2022-10-30-sql-subquery-example/1.png){: width="600" height="500" }  
 
 第一次搜尋，試著尋找與字母CD有關的資料，Main為自定義變數
-<script>
+<script  type='text/javascript' src=''>
 
       with Main as
       (
@@ -26,7 +26,7 @@ tags: [SQL]
 ![Desktop View](/assets/img/2022-10-30-sql-subquery-example/2.png){: width="600" height="500" }
 
 第二次搜尋，從上回搜尋的結果資料當中，繼續搜尋與字母A有關的資料
-<script>
+<script  type='text/javascript' src=''>
 
       with Main as
       (

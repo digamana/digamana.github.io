@@ -8,7 +8,7 @@ published: true
 ---
 利用AJAX跟C#串接的方式  
 1.在Model 建立一個新的Class 這邊取名為Employee.cs 
-<script>
+<script  type='text/javascript' src=''>
   
     using System;
     using System.Collections.Generic;
@@ -31,7 +31,7 @@ published: true
 
 2.在HomeController.cs 底下新增一個回傳JsonResult的Method
   讓我可以把陣列資料回傳到前端
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
     using System.Collections.Generic;
@@ -69,7 +69,7 @@ data裡面輸入要GetDataDemo的參考
 
  
 如下所示，這邊Type使用的是Get
-<script>
+<script  type='text/javascript' src=''>
 
     @{
         ViewBag.Title = "Index";
@@ -80,7 +80,7 @@ data裡面輸入要GetDataDemo的參考
     <p>Use this area to provide additional information.</p>
 
     @section scripts{
-        <script>
+        <script  type='text/javascript' src=''>
         $(document).ready(function () {
             AjaxDEMO()
         });
@@ -119,7 +119,7 @@ data裡面輸入要GetDataDemo的參考
 如果遇到Method必須回傳Class的情況
   
 假設我們Controller的回傳JsonResult的Method如下  
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
     using System.Collections.Generic;
@@ -155,7 +155,7 @@ data裡面輸入要GetDataDemo的參考
 
   Script則這樣打，需要留意，這邊Type使用的是Post
  （用Get印象中會失敗）
-<script>
+<script  type='text/javascript' src=''>
 
       @{
           ViewBag.Title = "index";
@@ -166,7 +166,7 @@ data裡面輸入要GetDataDemo的參考
       <p>Use this area to provide additional information.</p>
 
       @section scripts{
-          <script>
+          <script  type='text/javascript' src=''>
           $(document).ready(function () {
               AjaxDEMO()
           });

@@ -21,7 +21,7 @@ Visual Studio Administrator Mode
  
 
 使用的套件
-<script>
+<script  type='text/javascript' src=''>
 
     NuGet\Install-Package AutoItX.Dotnet -Version 3.3.14.5
 
@@ -30,19 +30,19 @@ Visual Studio Administrator Mode
 
 主要指令
 1.開啟檔案位置
-<script>
+<script  type='text/javascript' src=''>
 
     AutoItX.Run("Software Path", string.Empty);
 
 
 1.等待畫面出現
-<script>
+<script  type='text/javascript' src=''>
 
     AutoItX.WinWaitActive("Software Title");
 
 
 1.Click畫面中的Button
-<script>
+<script  type='text/javascript' src=''>
 
     AutoItX.ControlClick("Software Title", "", "Control Advanced Mode");
 

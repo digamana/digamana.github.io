@@ -12,7 +12,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 1.完成新增ADO.NET的操作 如「Entity Framework Code First if DataBase Exist-1」 
 
 2.Creat New Class Name： IRepository.cs
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
     using System.Collections.Generic;
@@ -34,7 +34,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 3.Creat New Class Name： IMemberRepository.cs
-<script>
+<script  type='text/javascript' src=''>
 
     namespace Entity_Framework_Repository_Pattern
     {
@@ -47,7 +47,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 4.Creat New Class Name： Repository.cs
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
     using System.Collections.Generic;
@@ -111,7 +111,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 5.Creat New Class Name : MemberRepository.cs
-<script>
+<script  type='text/javascript' src=''>
 
     namespace Entity_Framework_Repository_Pattern
     {
@@ -129,7 +129,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 6.Creat New Class Name : IUnitOfWork.cs
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
 
@@ -144,7 +144,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 7.Creat New Class Name : UnitOfWork.cs
-<script>
+<script  type='text/javascript' src=''>
 
     using System.Collections.Generic;
     using System.Linq;
@@ -179,7 +179,7 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 9.Read MSSQL  
 ![Desktop View](/assets/img/2022-11-06-c-sharp-connect-mssql-use-entity-framework-repository-pattern/3.png){: width="600" height="500" }
-<script>
+<script  type='text/javascript' src=''>
 
     using System;
     using System.Collections.Generic;

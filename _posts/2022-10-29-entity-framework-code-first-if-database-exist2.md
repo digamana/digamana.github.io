@@ -8,7 +8,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/11.png){: width="600" height="500" }
 
 2.執行安裝EntityFramework
-<script>
+<script  type='text/javascript' src=''>
 
      NuGet\Install-Package EntityFramework -Version 6.4.4
 
@@ -18,7 +18,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 
 2.執行  
-<script>
+<script  type='text/javascript' src=''>
 
      enable-migrations
 
@@ -27,7 +27,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist2/2.png){: width="600" height="500" }
 
 3.建立初始資料
-<script>
+<script  type='text/javascript' src=''>
 
      add-migration InitialModel -IgnoreChanges -Force
 
@@ -36,7 +36,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist2/3.png){: width="600" height="500" }
 
 4.在更新操作紀錄到資料庫中，以便追蹤更改記錄  
-<script>
+<script  type='text/javascript' src=''>
 
      Update-Database
 
@@ -46,7 +46,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 5.在VS建立新的資料表的方式  
   備註：在使用Code First的情況下  
-<script>
+<script  type='text/javascript' src=''>
 
      using System;
      using System.Collections.Generic;
@@ -74,7 +74,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 7.執行add-migration NewDataSheetTable -Force  
 備註:NewDataSheetTable 是自己任意定義的名稱  
  -Force表示強制覆蓋當前的migration記錄
-<script>
+<script  type='text/javascript' src=''>
 
      add-migration NewDataSheetTable -Force
   
@@ -88,7 +88,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
  !!!如果數值為Int且不須自動累加數值，identity的Bool記得要改為false  
 需再Migration資料夾中的NewDataSheetTable遷移記錄 進行更改  
 若需要添加內容，可於Up下方輸入SQL指令，變成
-<script>
+<script  type='text/javascript' src=''>
 
       namespace CodeFirst.Migrations
       {
@@ -120,7 +120,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 確認完要更改的項目之後
 執行Update-Database：同步更新實體資料庫
-<script>
+<script  type='text/javascript' src=''>
 
       Update-Database
 

@@ -8,7 +8,7 @@ categories: [Other ,AutoIT]
 AutoIT的加密 與 解密
 
 加密
-<script>
+<script  type='text/javascript' src=''>
 
       #include <Crypt.au3>           ;  
       #include <MsgBoxConstants.au3> ; 
@@ -24,7 +24,7 @@ AutoIT的加密 與 解密
 
 
 解密
-<script>
+<script  type='text/javascript' src=''>
 
     #include <Crypt.au3>           ;  
     #include <MsgBoxConstants.au3> ; 

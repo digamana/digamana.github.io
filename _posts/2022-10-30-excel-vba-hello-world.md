@@ -21,7 +21,7 @@ categories: [Other ,Excel VBA]
 
 5.簡單的Hello World ：點選button後MessageBox會跳出A1的內容  
 ![Desktop View](/assets/img/2022-10-30-excel-vba-hello-world/5.png){: width="600" height="500" }
-<script>
+<script  type='text/javascript' src=''>
 
      Sub 按鈕1_Click()
       MsgBox ThisWorkbook.Sheets("工作表1").Cells(1, 1)
