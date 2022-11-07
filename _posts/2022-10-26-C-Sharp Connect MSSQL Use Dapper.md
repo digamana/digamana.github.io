@@ -14,14 +14,14 @@ Github：https://github.com/digamana/Open-Sql-Data-Source
 
 Use Nuget Setup Dapper  
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect MSSQL Use Dapper/2.png){: width="600" height="500" }
-<script>
+<script type='text/javascript' src=''>
 
     NuGet\Install-Package Dapper -Version 2.0.123
 
 
 
 Creat New Class Exmaple：DemoSheet.cs
-<script>
+<script  type='text/javascript' src=''>
 
     namespace DemmoDapper
     {
@@ -88,7 +88,7 @@ Creat New Class Exmaple：DemoSheet.cs
 
 
 Use Dapper Get Data Example：
-<script>
+<script  type='text/javascript' src=''>
 
     using Dapper;
     using System;
@@ -127,7 +127,7 @@ Use Dapper Get Data Example：
 
 Use Dapper Get 「Sql Stored Procedure」 Data Example：
 1.Creat Sql Stored Procedure Example
-<script>
+<script  type='text/javascript' src=''>
 
     USE [TestDB]
     GO
@@ -153,7 +153,7 @@ Use Dapper Get 「Sql Stored Procedure」 Data Example：
 
 
 2.Dapper Get 「Sql Stored Procedure」 Data Example
-<script>
+<script  type='text/javascript' src=''>
 
     using Dapper;
     using System;
