@@ -58,6 +58,12 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
+      - name: Save state
+        run: echo "{name}={value}" >> $GITHUB_STATE
+
+      - name: Set output
+        run: echo "{name}={value}" >> $GITHUB_OUTPUT
+
   deploy:
     name: "Deploy site"
     environment:
