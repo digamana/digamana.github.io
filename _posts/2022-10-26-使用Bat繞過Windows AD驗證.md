@@ -15,7 +15,9 @@ published: false
 
 使用NotePad++開啟，
 輸入
-runas/user:Domain\Account /savecred "FileExe Path"  
+<script  type='text/javascript' src=''>
+
+    runas/user:Domain\Account /savecred "FileExe Path"  
 並另存為bat檔  
 
 Domain\Account 是該網域中的AD帳號

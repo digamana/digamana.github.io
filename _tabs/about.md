@@ -2,6 +2,7 @@
 # the default layout is 'page'
 icon: fas fa-info-circle
 order: 4
+toc: true
 ---  
 這個Blog是用來記錄我從出社會之後所碰過的技術問題  
 在解決問題或學到新的知識之後，決定將其Source Code留下架構其餘代換成簡單的資料做成Hello Word記錄下來
