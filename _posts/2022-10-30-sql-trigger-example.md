@@ -7,7 +7,8 @@ tags: [SQL]
 ---
 透過Trigger紀錄資料異動的紀錄
 
-1.首先會有一個主資料表
+## 1.首先會有一個主資料表
+Source Code：
 <script  type='text/javascript' src=''>
 
       USE [DemoDB]
@@ -46,7 +47,8 @@ tags: [SQL]
 
 ![Desktop View](/assets/img/2022-10-30-sql-trigger-example/1.png){: width="400" height="400" }
 
-2.建立用來記錄異動資料的資料表
+## 2.建立用來記錄異動資料的資料表
+Source Code：
 <script  type='text/javascript' src=''>
 
         USE [DemoDB]
@@ -68,7 +70,8 @@ tags: [SQL]
 
 ![Desktop View](/assets/img/2022-10-30-sql-trigger-example/2.png){: width="400" height="400" }
 
-3.在主資料表底下建立Trigger  
+## 3.在主資料表底下建立Trigger
+如圖
 ![Desktop View](/assets/img/2022-10-30-sql-trigger-example/3.png){: width="200" height="200" }
 
 
@@ -117,7 +120,7 @@ tags: [SQL]
       GO
 
 
-方法２：Insert時 Select來找到被改變的那一列  
+方法2：Insert時 Select來找到被改變的那一列  
 [參考至此](https://www.sqlshack.com/understanding-change-tracking-in-sql-server-using-triggers/)
 <script  type='text/javascript' src=''>
 

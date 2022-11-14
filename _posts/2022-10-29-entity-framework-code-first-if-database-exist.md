@@ -4,14 +4,18 @@ title: 'Entity Framework Code First if DataBase Exist-1'
 date: 2022-10-29 14:09 +0800
 categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL Setting]
 ---
+## 前言
 資料庫已存在時的Code First操作方式
 
 這是要用來DEMO的當作已存在的資料庫
 
 在開始DEMO之前 要先有確定有已存在的資料庫並將其連線新增至專案中  
-都完成了才會開始使用Code First指令  
+都完成了才會開始使用Code First指令
+## DEMO用的資料庫中的資料表的樣子
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/1.png){: width="600" height="500" }
-  
+
+
+## 建立DEMO用資料表的Query
 [DemoDB]是我用來DEMO的資料庫名稱
 <script  type='text/javascript' src=''>
 
@@ -50,27 +54,29 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
     GO
 
 
+## 建立專案
 開起一個用來DEMO用的專案  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/2.png){: width="600" height="500" }  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/3.png){: width="600" height="500" }  
 
  
-將ADO.NET實體資料模型加入道專案中  
-1.新增項目  
+## 將ADO.NET實體資料模型加入道專案中  
+## 1.新增項目  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/6.png){: width="600" height="500" }
 
-2.選擇ADO.NET實體資料模型  
+
+## 2.選擇ADO.NET實體資料模型  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/7.png){: width="600" height="500" }
 
-3.因為是要DEMO操作已存在的資料庫 所以選擇來自資料庫的Code First  
+## 3.因為是要DEMO操作已存在的資料庫 所以選擇來自資料庫的Code First  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/8.png){: width="600" height="500" }
 
-4.設定連線資料（根據自己環境新增連線）
+## 4.設定連線資料（根據自己環境新增連線）
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/9.png){: width="600" height="500" }
 
-5.選擇資料庫物件
+## 5.選擇資料庫物件
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/10.png){: width="600" height="500" }
 
-6.完成
+## 6.完成
 會新增一個檔案像下圖這樣
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist/11.png){: width="600" height="500" }

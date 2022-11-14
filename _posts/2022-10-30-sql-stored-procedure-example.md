@@ -5,7 +5,8 @@ date: 2022-10-30 17:37 +0800
 categories: [Other ,SQL]
 tags: [SQL]
 ---
-建立Store Procedure
+## 建立Store Procedure
+Source Code：
 <script  type='text/javascript' src=''>
         USE [DemoDB]
         GO
@@ -39,8 +40,9 @@ tags: [SQL]
         END
         GO
 
-如果輸入" " 或Null 回傳全部資料的方式  
-不特別處理的話會Search " "或Null  
+
+## 如果輸入" " 或Null 回傳全部資料的方式  
+若不特別處理的話會Search " "或Null  
 通常使用操作上如果不輸入數值,通常會希望將資料全部帶出來
 Select的部分改成如下
 <script  type='text/javascript' src=''>

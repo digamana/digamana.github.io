@@ -1,23 +1,26 @@
 ---
 layout: post
-title: C-Sharp Unit Testing Use NUnit
+title: C# Unit Testing Use NUnit
 date: 2022-11-09 16:15 +0800
 ---
 
-
-NUnit
+## 快速建立專案的示範影片
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I2_C-lyRAzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## 安裝NUnit 與 NUnit3TestAdapter
+NUnit：
 <script  type='text/javascript' src=''>
 
     NuGet\Install-Package NUnit -Version 3.13.3
 
-
-NUnit3TestAdapter
+NUnit3TestAdapter：
 <script  type='text/javascript' src=''>
 
     NuGet\Install-Package NUnit3TestAdapter -Version 4.3.0
 
 
+## 建立NUnit單元測試專案
 UnitTesting.Test
+Source Code：
 <script  type='text/javascript' src=''>
 
     namespace UnitTesting.Test
@@ -41,7 +44,7 @@ UnitTesting.Test
         }
     }
 
-
+## SetUp的使用方式
 SetUp用法，用來減少Method中，每次都需要重新寫new Class
 <script  type='text/javascript' src=''>
 
@@ -71,6 +74,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
         }
     }
 
+## 參數與TestCase的使用方式
  如果相同的Method需要根據參數做不同的測試
  <script  type='text/javascript' src=''>
 
@@ -97,11 +101,12 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
         }
     }
 
-重構過程如圖所示
+## 重構單元測試的方式
 ![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/6.png){: width="800" height="600" }  
 
 
-不執行當前Method的測試內容 （by Pass）
+## by Pass的方式
+使用Ignore將不會執行當前Method的測試內容 （by Pass）
  <script  type='text/javascript' src=''>
 
     [TestCase(1,2,3)]
@@ -113,6 +118,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
+## 檢查字串開頭的方式
 字串開頭是否相等
  <script  type='text/javascript' src=''>
 
@@ -124,6 +130,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
+## 檢查字串結尾的方式
 字串結尾是否相等
  <script  type='text/javascript' src=''>
 
@@ -134,6 +141,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     Assert.That(result,Does.EndWith("Wold"));
     }
 
+## 檢查字串是否包含特定字串的方式
 字串結尾是否包含
  <script  type='text/javascript' src=''>
 
@@ -145,6 +153,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
+## 檢查陣列資料的方式
 確認陣列內容是否一樣
  <script  type='text/javascript' src=''>
 
@@ -156,6 +165,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
+## 檢查回拋Error的方式
 Error判斷
 如果有個物件長這樣
  <script  type='text/javascript' src=''>
@@ -187,7 +197,8 @@ Error判斷
         Assert.That(() => log.Log(err), Throws.ArgumentNullException);
     }
 
-透過重構建立更適合進行測試的程式
+
+## 透過重構建立更適合進行測試的程式
 假設有個程式如下
  <script  type='text/javascript' src=''>
 
@@ -266,6 +277,7 @@ Step2.提取interface  FileReader
 重構過程如圖所示  
 ![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/7.png){: width="800" height="600" }  
 
+## 新增用來測試的假物件的方式
 在單元測試裡面，新增用來測試的假物件
 <script  type='text/javascript' src=''>
 
@@ -365,3 +377,127 @@ then Testing Code
         var result = service.readTitle();
         Assert.That(result, Does.Contain("ERR"));
     }
+
+
+## 簡單使用Moq建立假物件
+Nuget如下
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package Moq -Version 4.18.2
+
+加入Moq後的重構方式
+![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/8.png){: width="800" height="600" }  
+<script  type='text/javascript' src=''>
+
+    using Moq;
+
+    namespace UnitTesting.Test
+    {
+        public class Tests
+        {
+            private Main main;
+            private Mock<IFileReader> _fileReader;
+            private service _service;
+
+            [SetUp]
+            public void Setup()
+            {
+                main=new Main();
+                 _fileReader = new Mock<IFileReader>();
+                 _service = new service(_fileReader.Object);
+            }
+            [Test]
+            public void test2()
+            {    
+                _fileReader.Setup(c=>c.Read(@"C:\temp\MyTxt.txt")).Returns("ERR");
+                var result = _service.readTitle();
+                Assert.That(result, Does.Contain("ERR"));
+            }
+        }
+    }
+
+
+## UnitOfWork 與 單元測試
+![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/9.png){: width="800" height="600" }  
+<script  type='text/javascript' src=''>
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    namespace UnitTesting
+    {
+        public class BookHelp 
+        {
+            public static string BookingIsExust(Booking booking, IBookingRepository bookingRepository)
+            {
+                if (booking.Status == "Cancelled") return String.Empty;
+                var tempBook = bookingRepository.GetBookings(booking.Id);
+                var overlappingBooking = tempBook.FirstOrDefault();
+                return overlappingBooking == null ? string.Empty : overlappingBooking.Ref;
+            }
+        }
+        internal class UnitOfWork
+        {
+            public IQueryable<Booking> Query<T>()
+            { 
+                return new List<Booking>().AsQueryable(); 
+            }
+        }
+        public interface IBookingRepository
+        {
+            IQueryable<Booking> GetBookings(int? id = null);
+        }
+        public class BookingRepository : IBookingRepository
+        {
+            public IQueryable<Booking> GetBookings(int? id=null)
+            {
+                var unitOfwork =new UnitOfWork();
+                var bookings = unitOfwork.Query<Booking>().Where(c => c.Status != "Cancelled");
+                if(id.HasValue)bookings=bookings.Where(c => c.Id != id.Value);  
+                return bookings;
+            }
+        }
+        public class Booking 
+        {
+            public string Status { get; set; }
+            public int Id { get; set; }
+            public DateTime ArrivalData { get; set; }
+            public DateTime DepartureData { get; set; }
+            public string Ref { get; set; }
+        }
+    }
+
+建立單元測試
+<script  type='text/javascript' src=''>
+
+    [Test]
+    public void test3()
+    { 
+        var mock =new Mock<IBookingRepository>();
+        mock.Setup(c => c.GetBookings(1)).Returns(new List<Booking>
+        {
+            new Booking { Id = 2,
+                ArrivalData = new DateTime(2022, 01, 01),
+                DepartureData = new DateTime(2022, 03, 03),
+                Ref="bbb"
+            }
+        }.AsQueryable());
+        var result=BookHelp.BookingIsExust(new Booking
+        {
+            Id = 2,
+            ArrivalData = new DateTime(2022, 01, 01),
+            DepartureData = new DateTime(2022, 03, 03),
+            Ref = "bbb"
+        }, mock.Object);
+        Assert.That(result,Is.Empty);
+    }
+
+
+## 可以搭配的技術
+- [Unit Of Work (Repository Pattern)]({{ site.baseurl }}{% link _posts/2022-11-06-c-sharp-connect-mssql-use-entity-framework-repository-pattern.md %})
+- [使用Autofac實現DI注入容器]({{ site.baseurl }}{% link _posts/2022-11-09-C-Sharp Container Use Autofac.md %})
+
+

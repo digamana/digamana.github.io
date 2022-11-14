@@ -1,12 +1,15 @@
 ---
 layout: post
-title: 2022-10-26-AutoIt Execute Software Use Admin
+title: AutoIt Execute Software Use Admin
 date: 2022-10-26 15:38 +0800
 categories: [Windows ,AutoIT]
 tags: [AutoIT]
 
 ---
+## 使用最高權限開啟指定檔案
+詳見以下Source Code
 <script  type='text/javascript' src=''>
+
       #include <MsgBoxConstants.au3>
       #include <WinAPIFiles.au3>
 
@@ -41,3 +44,9 @@ tags: [AutoIT]
           EndIf
 
       EndFunc   ;==>Example
+
+
+
+## 可以搭配的技術
+- [AutoIT加密與解密]({{ site.baseurl }}{% link _posts/2022-11-03-autoit-decrypt-and-encryption.md %})
+- [C# 軟體自動化，使用套件AutoItX]({{ site.baseurl }}{% link _posts/2022-10-26-C-Sharp Software automation Use AutoIt.md %})

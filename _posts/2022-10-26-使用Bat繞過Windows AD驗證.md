@@ -2,7 +2,7 @@
 layout: post
 title: '[待補][MIS]使用Bat指令繞過Windows AD驗證的方式'
 date: 2022-10-26 14:57 +0800
-categories: [Windows ,Bat]
+categories: [Other ,Bat]
 tags: [Bat]
 published: false 
 ---

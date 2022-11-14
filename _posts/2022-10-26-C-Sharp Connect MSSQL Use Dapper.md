@@ -3,15 +3,17 @@ layout: post
 title: C# Connect MSSQL Use Dapper
 date: 2022-10-26 15:41 +0800
 categories: [Visual studio And MSSQL,C# CRUD MSSQL Use Dapper]
-tags: [Dapper,C#,.Net Framework]
+tags: [Dapper,C#]
 published: true 
 ---
 
-範例資料表  
+## 範例資料表  
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect MSSQL Use Dapper/1.png){: width="600" height="500" }  
 上圖中的資料源可從這邊取得  
 Github：https://github.com/digamana/Open-Sql-Data-Source
 
+
+## 安裝Dapper
 Use Nuget Setup Dapper  
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect MSSQL Use Dapper/2.png){: width="600" height="500" }
 <script type='text/javascript' src=''>
@@ -20,6 +22,7 @@ Use Nuget Setup Dapper
 
 
 
+## 範例資料表的Class
 Creat New Class Exmaple：DemoSheet.cs
 <script  type='text/javascript' src=''>
 
@@ -87,6 +90,7 @@ Creat New Class Exmaple：DemoSheet.cs
     }
 
 
+## 使用Dapper取得DB資料的範例
 Use Dapper Get Data Example：
 <script  type='text/javascript' src=''>
 
@@ -125,6 +129,7 @@ Use Dapper Get Data Example：
 
 
 
+## 在MSSQL中建立Stored Procedure
 Use Dapper Get 「Sql Stored Procedure」 Data Example：
 1.Creat Sql Stored Procedure Example
 <script  type='text/javascript' src=''>
@@ -151,7 +156,7 @@ Use Dapper Get 「Sql Stored Procedure」 Data Example：
 
 
 
-
+## 使用Dapper執行Stored Procedure的範例
 2.Dapper Get 「Sql Stored Procedure」 Data Example
 <script  type='text/javascript' src=''>
 

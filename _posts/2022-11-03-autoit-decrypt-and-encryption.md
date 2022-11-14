@@ -38,3 +38,7 @@ AutoIT的加密 與 解密
     $bDecrypted = _Crypt_DecryptData($bEecrypted, $sKey, $algorithm);開始解密
     Return  BinaryToString($bDecrypted);獲得解密後的資料
     EndFunc   ;==>Test_Numparams
+
+
+## 可以搭配的技術
+- [軟體自動化]({{ site.baseurl }}{% link _posts/2022-10-26-AutoIt Execute Software Use Admin.md %})

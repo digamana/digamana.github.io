@@ -6,8 +6,10 @@ categories: [C#]
 tags: [C#,ASP.Net Framework,AJAX]
 published: true 
 ---
-利用AJAX跟C#串接的方式  
-1.在Model 建立一個新的Class 這邊取名為Employee.cs 
+利用AJAX跟C#串接的方式
+
+## 1.在Model 建立一個新的Class 這邊取名為Employee.cs
+Source Code：
 <script  type='text/javascript' src=''>
   
     using System;
@@ -26,11 +28,9 @@ published: true
 
 
 
-         
-
-
-2.在HomeController.cs 底下新增一個回傳JsonResult的Method
-  讓我可以把陣列資料回傳到前端
+## 2.在HomeController.cs 底下新增一個回傳JsonResult的Method
+讓我可以把陣列資料回傳到前端
+Source Code：
 <script  type='text/javascript' src=''>
 
     using System;
@@ -63,12 +63,11 @@ published: true
         }
     }
 
-3.Index.cshtml 追加Script
-data裡面輸入要GetDataDemo的參考
-所以可以看到兩者間有一樣的參數名稱
 
- 
-如下所示，這邊Type使用的是Get
+## 3.Index.cshtml 追加Script
+data裡面輸入要GetDataDemo的參考
+所以可以看到兩者間有一樣的參數名稱  
+如下所示，這邊Type使用的是Get  
 <script  type='text/javascript' src=''>
 
     @{
@@ -110,12 +109,13 @@ data裡面輸入要GetDataDemo的參考
         </script>
     }
   
-4.開啟網頁時，可以看到我們在第２點輸入的資訊
+## 4.開啟網頁時，可以看到我們在第２點輸入的資訊
   
 ![Desktop View](/assets/img/2022-10-28-asp-net-use-ajax-get-c-method-data/1.png){: width="600" height="500" }
 
 
 --------------------------------------------------------------------------------------------------------------------------
+## Controller的Method還傳Class時，JavaScript的撰寫方式
 如果遇到Method必須回傳Class的情況
   
 假設我們Controller的回傳JsonResult的Method如下  
@@ -203,4 +203,4 @@ data裡面輸入要GetDataDemo的參考
    最後可以下中斷點 看到我們在Vive表鍾用JavaScript傳遞到Controller的資料  
 ![Desktop View](/assets/img/2022-10-28-asp-net-use-ajax-get-c-method-data/2.png){: width="600" height="500" }
 
-  範例GIT: [Click](https://github.com/digamana/Ajax_GetData_Example.git)
+## 範例GIT: [Click](https://github.com/digamana/Ajax_GetData_Example.git)

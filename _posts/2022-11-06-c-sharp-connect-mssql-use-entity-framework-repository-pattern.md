@@ -4,12 +4,13 @@ title: C# Connect MSSQL Use Entity Framework Repository Pattern
 date: 2022-11-06 14:05 +0800
 categories: [Visual studio And MSSQL,C# CRUD MSSQL Use Entity Framework Repository Pattern]
 ---
-懶人包：詳見以下影片與GIT資源直接簡單建立檔案
+## 快速建立Repository Pattern的影片教學
+詳見以下影片與GIT資源直接簡單建立檔案
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RFGdW_CmNyQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo  
+[Github Source Code](https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo  )
 
 
-1.完成新增ADO.NET的操作 如「Entity Framework Code First if DataBase Exist-1」 
+1.完成新增ADO.NET的操作 如「[Entity Framework Code First if DataBase Exist-1]({{ site.baseurl }}{% link _posts/2022-10-29-entity-framework-code-first-if-database-exist.md %})」 
 
 2.Creat New Class Name： IRepository.cs
 <script  type='text/javascript' src=''>
@@ -208,3 +209,6 @@ Github：https://github.com/digamana/CreatEntityFrameworkRepositoryPatternRepo
 
 
 
+## 可以搭配的技術
+- [Code First]({{ site.baseurl }}{% link _posts/2022-10-29-entity-framework-code-first-if-database-exist.md %})
+- [使用Autofac實現DI注入容器]({{ site.baseurl }}{% link _posts/2022-11-09-C-Sharp Container Use Autofac.md %})

@@ -7,6 +7,7 @@ categories: [Other ,Excel VBA]
 ---
 這邊DEMO使用Button讀取、寫入Excel儲存格的範例
 
+## 簡單建立EXCEL 並使用VBA的方式
 1.範例Eecel  
 ![Desktop View](/assets/img/2022-10-30-excel-vba-hello-world/1.png){: width="600" height="500" }
 
@@ -29,3 +30,17 @@ categories: [Other ,Excel VBA]
 
 6.成功畫面  
 ![Desktop View](/assets/img/2022-10-30-excel-vba-hello-world/6.png){: width="600" height="500" }
+
+
+## Delete File
+Source Code：
+
+## Copy File
+Source Code：
+
+## Open Other Excel (Workbook)
+Source Code：
+
+
+
+

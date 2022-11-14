@@ -4,14 +4,15 @@ title: Entity Framework Code First if DataBase Exist3
 date: 2022-10-29 17:15 +0800
 categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL Setting]
 ---
+## 前言  
 使用Fluent Api修改資料表型態、名稱等方式  
 好處:較能達成程式碼的耦合分離  
 以變更現有資料表NewDataSheets的設定為例
 欄位設定如附圖  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/0.png){: width="600" height="500" }
 
-前置作業  
- 1.建議新增統一放置Config的資料夾，並在其中加入新的cs檔 
+
+## 1.建議新增統一放置Config的資料夾，並在其中加入新的cs檔   
 例如NewDataSheetConfig.cs  
 <script  type='text/javascript' src=''>
 
@@ -31,7 +32,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 如附圖  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/1.png){: width="600" height="500" }
 
-2.變更Model1.cs底下的OnModelCreating的寫法  
+## 2.變更Model1.cs底下的OnModelCreating的寫法  
 更改前  
 <script  type='text/javascript' src=''>
       using System.Data.Entity;
@@ -93,7 +94,7 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 
 
-3.設定所需變更的資料  
+## 3.設定所需變更的資料  
 例如我希望Name的資料型態長度是20
 <script  type='text/javascript' src=''>
 
@@ -109,7 +110,8 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
           }
       }
 
-然後Add-Migration  
+## 4.執行Add-Migration
+指令：
 <script  type='text/javascript' src=''>
 
      Add-Migration SetMaxLength
@@ -118,7 +120,8 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 如附圖  
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/2.png){: width="600" height="500" }
 
-並執行更新  
+## 5.執行更新Update-Database
+指令：
 <script  type='text/javascript' src=''>
 
      Update-Database
@@ -131,9 +134,8 @@ categories: [Visual studio And MSSQL,Use C# And NuGet Command  To Change MSSQL S
 
 
 
-!!!還原Migration版本的方式!!!  
+## 6.還原Migration版本的方式  
 !!!但是不建議如次操作，因為修改後若要Update，會遺失中間的Migration留存紀錄  
- 
  <script  type='text/javascript' src=''>
 
      Update-Database -TargetMigration: OddDataSheetReNameNameTo_Name
@@ -143,7 +145,8 @@ OddDataSheetReNameNameTo_Name為Migrations資料夾底下的檔名
 ![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/5.png){: width="600" height="500" }
 
 
-以下是可以參考的指令  
+## 以下是Fluent Api可以參考的指令
+![Desktop View](/assets/img/2022-10-29-entity-framework-code-first-if-database-exist3/1.png){: width="600" height="500" }
 變更TableName↓
 <script  type='text/javascript' src=''>
 

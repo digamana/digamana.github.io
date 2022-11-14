@@ -49,6 +49,7 @@ Autofac.Mvc5
 
 建立用來實現DI的Class，例如AutofacConfig.cs  
 ![Desktop View](/assets/img/2022-11-09-C-Sharp Container Use Autofac/3.png){: width="800" height="600 }
+AutofacConfig.cs 內部長這樣
 <script  type='text/javascript' src=''>
 
 
@@ -105,3 +106,7 @@ Autofac.Mvc5
             }
         }
     }
+
+
+## 可以搭配的技術
+- [Unit Of Work (Repository Pattern)]({{ site.baseurl }}{% link _posts/2022-11-06-c-sharp-connect-mssql-use-entity-framework-repository-pattern.md %})
