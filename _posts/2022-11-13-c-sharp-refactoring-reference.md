@@ -82,7 +82,7 @@ date: 2022-11-13 23:18 +0800
 ## ITextProcessor
 [To Step1](#step1)
 [To Step2](#step2)
-[To Step3](#step3)
+[To Step3](#step3-方法3)
 
 範例  
 <script  type='text/javascript' src=''>
@@ -183,7 +183,7 @@ date: 2022-11-13 23:18 +0800
 
 
 ## Pipeline
-[To Step1](#step3-方法1)
+[To Step3](#step3-方法1)
 [To Step3](#step3-方法3)
 範例  
 <script  type='text/javascript' src=''>
