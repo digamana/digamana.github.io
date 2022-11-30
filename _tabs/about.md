@@ -17,7 +17,7 @@ toc: true
 [Step3.選擇使用chirpy主題建立](https://chirpy.cotes.page/posts/getting-started/#option-1-using-the-chirpy-starter)  
 [Step4.創建一個新存儲庫](https://github.com/cotes2020/jekyll-theme-chirpy)  
 [Step5.解決Push到Git上時的所遇到的問題](https://github.com/cotes2020/jekyll-theme-chirpy/issues/628)  
-[Step6.追加jekyll-compose插件，方便用指令管理文章](https://github.com/jekyll/jekyll-compose)
+[Step6.追加jekyll-compose插件，方便用指令管理文章](https://github.com/jekyll/jekyll-compose)  
 [Step7.Markdown語法參考說明](https://ithelp.ithome.com.tw/markdown)
 
 

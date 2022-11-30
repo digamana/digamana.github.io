@@ -420,7 +420,38 @@ excel.sheet[201, 3].Value 以後的資料為「""」
         }
     }
 
- 
+
+Microsoft.Office.Interop.Excel的轉檔Function
+<script  type='text/javascript' src=''>
+
+    public static string ConvertXLS_XLSX(string filePath)
+    {
+        FileInfo file = new FileInfo(filePath);
+        var app = new Microsoft.Office.Interop.Excel.Application();
+        var xlsFile = file.FullName;
+        var wb = app.Workbooks.Open(xlsFile);
+        var xlsxFile = xlsFile + "x";
+        app.DisplayAlerts = false;
+        wb.SaveAs(Filename: xlsxFile, FileFormat: Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook);
+        wb.Close();
+        app.Quit();
+        return xlsxFile;
+    }
+
+
+小記
+
+![Desktop View](/assets/img/2022-11-27-c-sharp-read-excel/6.png){: width="800" height="600" }  
+如果在C#有代入跟相對位置有關的公式，例如上圖這種的公式  
+要使用的是FormulaR1C1然後進行Calculate才會有資料
+<script  type='text/javascript' src=''>
+
+    excel.sheet.Cells[1, 2].FormulaR1C1 = "=工作表2!A1";
+    excel.sheet.Cells[1, 2].Calculate();
+
+如果使用的是Formula，下中斷點會發現資料為Null，
+![Desktop View](/assets/img/2022-11-27-c-sharp-read-excel/7.png){: width="800" height="600" } 
+
 
 ## 其他套件
 ### SpreadsheetLight
