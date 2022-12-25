@@ -10,7 +10,7 @@ date: 2022-11-14 11:10 +0800
     Get-Service | Export-CSV c:\temp\service.csv
 
 # 使用NotePad++將指令另存成ps1檔  
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/1.PNG){: width="600" height="250" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/1.png){: width="600" height="250" }
 
 
 
@@ -38,7 +38,7 @@ C# Source Code
 ## 建立.Net Framework專案  
 
 附圖為.Net Core的檔案位置
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/8.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/8.png){: width="600" height="500" }
 
 在.Net Framework的專案執行
 <script  type='text/javascript' src=''>
@@ -60,10 +60,10 @@ C# Source Code
 
 # 失敗時，須調整的設定  
 如果出現類似附圖情況  
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/2.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/2.png){: width="600" height="500" }
 
 先透過PowerShell確認當前原則狀態  
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/3.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/3.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
  
     Get-ExecutionPolicy
@@ -72,7 +72,7 @@ C# Source Code
 微軟的官方文件[about_Execution_Policies](https://learn.microsoft.com/zh-tw/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.3)
 有提到我當前的「PowerShell 執行原則」Restricted不允許執行腳本，所以我必須變更原則設定
   
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/4.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/4.png){: width="600" height="500" }
 
 以變更成RemoteSigned為例
 <script  type='text/javascript' src=''>
@@ -80,11 +80,11 @@ C# Source Code
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 需使用最高權限執行PowerShell才能成功變更設定  
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/6.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/6.png){: width="600" height="500" }
 
 
 否則會出現  
-![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/5.PNG){: width="600" height="500" }
+![Desktop View](/assets/img/2022-11-14-c-sharp-software-automation-use-bat-execute-powershell-command/5.png){: width="600" height="500" }
 
 
 
