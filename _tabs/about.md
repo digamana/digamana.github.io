@@ -11,7 +11,9 @@ toc: true
 
 
 
-這個網站是根據以下參考建立而成的  
+這個網站是根據以下參考建立而成的
+[Step0.Jekyll安裝] (https://jekyllrb.com/docs/installation/windows/  )  
+[Step0.本地伺服器無法運作時,參考這裡進行更新](https://stackoverflow.com/questions/6317980/you-have-already-activated-x-but-your-gemfile-requires-y) 
 [Step1.使用Github + Jekyll建立 ](https://ithelp.ithome.com.tw/articles/10198964)  
 [Step2.使用主題來建立 ](https://hackmd.io/@CynthiaChuang/Setting-Up-a-GitHub-Pages-Site-with-Jekyll#1-%E6%8C%91%E9%81%B8%E4%B8%BB%E9%A1%8C)  
 [Step3.選擇使用chirpy主題建立](https://chirpy.cotes.page/posts/getting-started/#option-1-using-the-chirpy-starter)  
