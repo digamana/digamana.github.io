@@ -6,7 +6,17 @@ date: 2022-11-09 16:15 +0800
 
 ## 快速建立專案的示範影片
 <iframe width="560" height="315" src="https://www.youtube.com/embed/I2_C-lyRAzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-## 安裝NUnit 與 NUnit3TestAdapter
+## 選擇測試專案
+
+### 選擇1.建立NUnit測試專案
+<p>直接建立NUnit 測試專案</p>
+![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/10.png){: width="800" height="300" }  
+
+### 選擇2.建立MSTest測試專案
+<p>直接建立MSTest測試專案,並安裝NUnit相關套件</p>
+
+<p>安裝NUnit 與 NUnit3TestAdapter</p>
+![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/11.png){: width="800" height="300" }  
 NUnit：
 <script  type='text/javascript' src=''>
 
@@ -18,7 +28,10 @@ NUnit3TestAdapter：
     NuGet\Install-Package NUnit3TestAdapter -Version 4.3.0
 
 
-## 建立NUnit單元測試專案
+## NUnit.第一個測試
+
+### Hello World
+<p>如下方範例,主要使用的是Assert.That</p>
 UnitTesting.Test
 Source Code：
 <script  type='text/javascript' src=''>
@@ -44,7 +57,7 @@ Source Code：
         }
     }
 
-## SetUp的使用方式
+### SetUp的使用方式
 SetUp用法，用來減少Method中，每次都需要重新寫new Class
 <script  type='text/javascript' src=''>
 
@@ -74,7 +87,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
         }
     }
 
-## 參數與TestCase的使用方式
+### 參數與TestCase的使用方式
  如果相同的Method需要根據參數做不同的測試
  <script  type='text/javascript' src=''>
 
@@ -101,11 +114,11 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
         }
     }
 
-## 重構單元測試的方式
+### 重構單元測試的方式
 ![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/6.png){: width="800" height="600" }  
 
-
-## by Pass的方式
+## 參考語法
+### by Pass的方式
 使用Ignore將不會執行當前Method的測試內容 （by Pass）
  <script  type='text/javascript' src=''>
 
@@ -118,7 +131,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
-## 檢查字串開頭的方式
+### 檢查字串開頭的方式
 字串開頭是否相等
  <script  type='text/javascript' src=''>
 
@@ -130,7 +143,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
-## 檢查字串結尾的方式
+### 檢查字串結尾的方式
 字串結尾是否相等
  <script  type='text/javascript' src=''>
 
@@ -141,7 +154,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     Assert.That(result,Does.EndWith("Wold"));
     }
 
-## 檢查字串是否包含特定字串的方式
+### 檢查字串是否包含特定字串的方式
 字串結尾是否包含
  <script  type='text/javascript' src=''>
 
@@ -153,7 +166,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
-## 檢查陣列資料的方式
+### 檢查陣列資料的方式
 確認陣列內容是否一樣
  <script  type='text/javascript' src=''>
 
@@ -165,7 +178,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
     }
 
 
-## 檢查回拋Error的方式
+### 檢查回拋Error的方式
 Error判斷
 如果有個物件長這樣
  <script  type='text/javascript' src=''>
@@ -218,7 +231,7 @@ Error判斷
     }
 
 
-Step2.提取
+Step2.將「File.ReadAllText("")」這個功能，提取到到新的Class中,爾後調用這個Class進行使用
 <script  type='text/javascript' src=''>
 
     public class service
@@ -245,7 +258,7 @@ Step2.提取
 
 
 
-Step2.提取interface  FileReader
+Step2.從新建的Class中,將Method提煉到到Interface中,爾後
 <script  type='text/javascript' src=''>
 
     public class service

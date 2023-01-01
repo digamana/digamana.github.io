@@ -21,7 +21,7 @@ toc: true
 [Step5.解決Push到Git上時的所遇到的問題](https://github.com/cotes2020/jekyll-theme-chirpy/issues/628)  
 [Step6.追加jekyll-compose插件，方便用指令管理文章](https://github.com/jekyll/jekyll-compose)  
 [Step7.Markdown語法參考說明](https://ithelp.ithome.com.tw/markdown)  
-[Step8.部署一直失敗的話,檢查本地Ruby Version與pages-deploy.yml的ruby Version](https://digamana.github.io/assets/img/2022-10-26-AutoIt%20Execute%20Software%20Use%20Admin/0.png)
+[Step8.部署一直失敗的話,檢查本地Ruby Version與pages-deploy.yml的ruby Version](https://digamana.github.io/assets/img/2022-10-26-AutoIt%20Execute%20Software%20Use%20Admin/0.png)  
 
 > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
 {: .prompt-tip }

@@ -50,6 +50,19 @@ Source Code Setting
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/4.png){: width="600" height="500" }   
 
 
+## 獲得Return結構的方式
+
+<p>使用GetStructure</p>
+![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/8.png){: width="600" height="500" }
+
+<p>以下是使用SAP內建的"獲取匯率"的RFC 演示 輸入/輸出</p>
+![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/5.png){: width="600" height="500" }
+<p>根據輸出內容,去結構中確認對應的宣告字串</p>
+![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/6.png){: width="600" height="500" }
+<p>在C#中使用GetStructure獲取需要Return的字串</p>
+<p>在使用GetString,來取得其內容</p>
+![Desktop View](/assets/img/2022-10-26-C-Sharp Connect SAP RFC/7.png){: width="600" height="500" }
+
 ## 建立專案使用C#串接 SAP RFC的影片
 串接方式可詳見以下影片  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Y8qZMO56sYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
