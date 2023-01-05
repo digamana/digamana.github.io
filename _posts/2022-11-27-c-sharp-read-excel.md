@@ -438,6 +438,49 @@ Microsoft.Office.Interop.Excel的轉檔Function
         return xlsxFile;
     }
 
+可導向到本地下載網址的套件
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package Syroot.Windows.IO.KnownFolders -Version 1.2.3
+
+刻製新的Excel檔案的範例寫法
+<script  type='text/javascript' src=''>
+
+    using OfficeOpenXml;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+
+    namespace ConsoleApp7
+    {
+        internal class Program
+        {
+            public static readonly string Downloads = new Syroot.Windows.IO.KnownFolder(Syroot.Windows.IO.KnownFolderType.Downloads).Path;
+            static void Main(string[] args)
+            {
+                CreatNewExcel("test1");
+            }
+            public static void CreatNewExcel(string FileName)
+            {
+                ExcelPackage excel = new ExcelPackage();
+                ExcelWorksheet workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+                workSheet.Cells[1, 1].Value = "Col_A";
+                string strPath = Path.Combine(Downloads, $"{FileName}_{DateTime.Now.ToString("yymmddhhmmss")}.xlsx");
+                FileStream objFileStrm = File.Create(strPath);
+                objFileStrm.Close();
+                File.WriteAllBytes(strPath, excel.GetAsByteArray());
+                excel.Dispose();
+                Process.Start(strPath);
+            }
+        }
+    }
+
+
+備註 取得Rows最大值的方式
+<script  type='text/javascript' src=''>
+
+    workSheet.Dimension.End.Row
+
 
 小記
 
