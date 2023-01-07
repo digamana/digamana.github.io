@@ -44,11 +44,14 @@ date: 2023-01-06 20:22 +0800
 
 ### 正式開始
 
-<p>從PowerShell登入Microsoft</p> 
-UserPrincipalName請打O365的管理者帳號
+<p>從PowerShell登入Microsoft</p>
+<p>UserPrincipalName後面請打O365的管理者帳號</p>
+<p>假設管理者帳號是 ABC@yahoo.com.tw</p>
+<p>就輸入 Connect-ExchangeOnline -UserPrincipalName   ABC@yahoo.com.tw</p>
+![Desktop View](/assets/img/2023-01-06-microsoft365-meeting-room-manage/9.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
-    Connect-ExchangeOnline -UserPrincipalName 
+    Connect-ExchangeOnline -UserPrincipalName  MyMail@Domain.com
 
 <p>使用get-DistributionGroup確認要加入的會議室目錄中文名稱</p>
 ![Desktop View](/assets/img/2023-01-06-microsoft365-meeting-room-manage/6.png){: width="600" height="500" }
