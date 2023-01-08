@@ -10,6 +10,45 @@ date: 2023-01-06 23:59 +0800
 <p>因為在這之前,也已經有在blog其他篇文章中,留下C# Dapper Connect SQL的操作方式、以及使用Excel迅速建檔的方式</p>
 <p>所以想到可以乾脆的趁這時利用這兩個素材解決我需求</p>
 
+## 關鍵Query
+
+關鍵的Query如下，整隻程式都是基於這個Query產生的資料去做延伸的
+ <script  type='text/javascript' src=''>
+
+     with main as
+     (
+     SELECT 
+        c.name 'Column Name', 
+        t.Name 'Column Type',
+        c.max_length 'Max Length',
+	    case
+	    when c.is_nullable = 0 then 'Not Null'
+	    when c.is_nullable = 1 then 'Is Null'
+        End  as 'IsNull',
+        ISNULL(i.is_primary_key, 0) 'IsPrimaryKey',
+	    c.object_id 'object_id'
+    FROM    
+        sys.columns c
+    INNER JOIN 
+        sys.types t ON c.user_type_id = t.user_type_id
+    LEFT OUTER JOIN 
+        sys.index_columns ic ON ic.object_id = c.object_id AND ic.column_id = c.column_id
+    LEFT OUTER JOIN 
+        sys.indexes i ON ic.object_id = i.object_id AND ic.index_id = i.index_id
+     )
+    SELECT
+    s.name AS SchemaName,
+    t.name AS TableName,
+    main.[Column Name] as N'ColumnName',
+    main.[Column Type] as N'ColumnType',
+    main.[Max Length] as N'MaxLength',
+    main.[IsNull],
+    main.[IsPrimaryKey]
+    FROM sys.tables t
+    INNER JOIN sys.schemas s
+    ON t.schema_id = s.schema_id　
+    left join main on   main.object_id = OBJECT_ID(t.name　)
+
 ## 操作介紹
 
 
@@ -40,6 +79,7 @@ date: 2023-01-06 23:59 +0800
 <p>匯出結果同上</p>
 ## 操作影片
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/COedXyWRpZc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## 執行檔下載點(Google Drive)
 <p>備註:執行檔自行斟酌下載,又或者從GitHub Code Review之後再自行使用</p>

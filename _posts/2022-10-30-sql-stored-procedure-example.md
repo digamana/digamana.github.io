@@ -52,3 +52,7 @@ Select的部分改成如下
     (@UserName IS NULL OR @UserName = [UserName] or LEN(LTRIM(@UserName)) = 0 )   and
     (@UserEmail IS NULL OR @UserEmail = [UserEmail] or LEN(LTRIM(@UserEmail)) = 0 )  
 
+
+## 備註
+<p>如果想要繼續精進SQL，記得從這下面的Blog文章繼續學習</p>
+[https://dotblogs.com.tw/ricochen/2011/06/23/29628](https://dotblogs.com.tw/ricochen/2011/06/23/29628)
