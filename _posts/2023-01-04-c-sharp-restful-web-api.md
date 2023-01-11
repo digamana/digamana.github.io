@@ -8,10 +8,86 @@ published: false
 <p>這邊紀錄一下我學到的RestFul Web Api的基本技巧與知識</p>
 
 ## 建立專案
+<p>選擇建立API</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/1.png){: width="600" height="500" }
+<p>設定完後建立</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/2.png){: width="600" height="500" }
 
-## 建立新的Controller
-### 設定ApiController
-### 設定Route
+## 情境說明
+<p>假設有個儲存設備資訊的資料表，如圖所示</p>
+<p>備註：後面所用到DTO,所以這邊資料表若欄位不多,將無法彰顯DTO的意義</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/3.png){: width="600" height="500" }
+## 建立Model
+<p>新增Model資料夾,在裡面新增Device.cs</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/4.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public class Device
+    {
+        public int Id { get; set; }
+        public int DeviceTypeId { get; set; } //設備類型
+        public string ItemName { get; set; } //設備品名
+        public string ItemDescription { get; set; } //物品描述
+        public string PCName { get; set; } //電腦名稱
+        public string AssetId { get; set; } //設備編號
+        public int DeviceStatusId { get; set; }//狀態Id
+        public int LocationId { get; set; } //設備ID
+        public DateTime? WarehousingDate { get; set; } //入庫時間
+        public string Custodian { get; set; } //保管人-代號
+        public string CustodianName { get; set; }//保管人-姓名
+        public string Department { get; set; }//部門編號
+        public string DepartmentName { get; set; }//部門名稱
+        public string Brand { get; set; }//設備品牌1
+        public string Model { get; set; }//設備品牌2
+        public string SerialNo { get; set; }//設備序號
+        public string System { get; set; }//系統
+        public string Ram { get; set; }//RAM
+        public string Disk { get; set; }//硬碟
+        public string OfficeVersion { get; set; }//Office版本
+        public string Mac01 { get; set; }//無線Mac
+        public string Mac02 { get; set; }//有線Mac
+        public string Remark { get; set; }//備註
+        public string Borrower { get; set; }//借用人工號
+        public string BorrowerName { get; set; }//借用人姓名
+        public DateTime? BorrowingDate { get; set; }//借用日期
+    }
+
+
+### 建立靜態資料
+<p>建立靜態List,先用靜態資料用來代替資料庫撈取</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/5.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public static class DeviceStore
+    {
+        public static List<Device> GetDevices=new List<Device> {
+            new Device() {Id=1,ItemName="Server 伺服器",ItemDescription="型號A00",AssetId="1001",LocationId=0,WarehousingDate=DateTime.Now,Custodian="A001",CustodianName="保管人A",Brand="",Model="",SerialNo="",System="",Ram="",Disk="",OfficeVersion="",Mac01="",Mac02="",Remark="",Borrower="",BorrowerName="",Department="",DepartmentName="",PCName="" },
+            new Device() {Id=2,ItemName="筆電A",ItemDescription="型號A01",AssetId="1101",LocationId=0,WarehousingDate=DateTime.Now,Custodian="A001",CustodianName="保管人A",Brand="",Model="",SerialNo="",System="",Ram="",Disk="",OfficeVersion="",Mac01="",Mac02="",Remark="",Borrower="",BorrowerName="",Department="",DepartmentName="",PCName="" },
+            new Device() {Id=3,ItemName="桌電A",ItemDescription="型號A02",AssetId="1010",LocationId=0,WarehousingDate=DateTime.Now,Custodian="A001",CustodianName="保管人A",Brand="",Model="",SerialNo="",System="",Ram="",Disk="",OfficeVersion="",Mac01="",Mac02="",Remark="",Borrower="",BorrowerName="",Department="",DepartmentName="",PCName="" },
+            new Device() {Id=4,ItemName="顯示器A",ItemDescription="型號A03",AssetId="1011",LocationId=0,WarehousingDate=DateTime.Now,Custodian="A001",CustodianName="保管人A",Brand="",Model="",SerialNo="",System="",Ram="",Disk="",OfficeVersion="",Mac01="",Mac02="",Remark="",Borrower="",BorrowerName="",Department="",DepartmentName="",PCName="" },
+            new Device() {Id=5,ItemName="投影機A",ItemDescription="型號A04",AssetId="1111",LocationId=0,WarehousingDate=DateTime.Now,Custodian="保A001管人A",CustodianName="保管人A",Brand="",Model="",SerialNo="",System="",Ram="",Disk="",OfficeVersion="",Mac01="",Mac02="",Remark="",Borrower="",BorrowerName="",Department="",DepartmentName="",PCName="" }
+        };
+    }
+
+
+### 建立DTO
+
+<p>新增DeviceDto.cs，在DeviceDto中，建立實際上要開放給外部進行CRUD的欄位，且屬性名稱與Device要一樣</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/6.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public class DevicesDto
+    {
+        public string AssetId { get; set; }// 財產編號
+        public string ItemName { get; set; }// 描述
+        public string ItemDescription { get; set; }// 部門
+        public string DepartmentId { get; set; }// 部門ID
+        public string Department { get; set; }// 部門
+        public string Borrower { get; set; }//借用人工號
+        public string BorrowerName { get; set; }//借用人姓名
+
+    }
+
 ### 設定Post/Get
 </p>備註:整理時注意<p>
 先用下面這種方式DEMO資料表的資料內容,然後寫 httpGet/httpPost/httpDelete/httpPatch使用上的範例寫法
@@ -25,7 +101,7 @@ published: false
             new Company{id=2,Name="US",Description="100" }
         };
     }
-<p>接著在演示 DTO and AutoMapper ->所有串接改成異步方法  -> 實際串接資料庫 -> 建立API Request </p>
+<p>接著在演示 DTO and AutoMapper ->所有串接改成異步方法  -> 實際串接資料庫 -> 建立API Request AND Response Class  -> 網頁專案中異步UnitOfWork</p>
 
 設定Post的方式
 <script  type='text/javascript' src=''>
