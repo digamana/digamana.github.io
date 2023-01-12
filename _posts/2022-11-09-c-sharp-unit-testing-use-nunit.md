@@ -167,6 +167,7 @@ SetUp用法，用來減少Method中，每次都需要重新寫new Class
 
 
 ### 檢查陣列資料的方式
+<p>方法2</p>
 確認陣列內容是否一樣
  <script  type='text/javascript' src=''>
 
@@ -289,6 +290,47 @@ Step2.從新建的Class中,將Method提煉到到Interface中,爾後
 
 重構過程如圖所示  
 ![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/7.png){: width="800" height="600" }  
+
+
+## 使用FluentAssertions陣列資料
+安裝FluentAssertions
+![Desktop View](/assets/img/2022-11-09-c-sharp-unit-testing-use-nunit/12.png){: width="800" height="600" }  
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package FluentAssertions -Version 6.8.0
+
+
+使用方式
+<script  type='text/javascript' src=''>
+
+    Punlic class Member
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    [Test]
+    public void Test()
+    {
+        var m1 = new Member() { Id = 1, Name = "111",Code="A" };
+        var m2 = new Member() { Id = 3, Name = "211",Code="B" };
+
+        m1.ShouldBeEquivalentTo(m2);
+    }
+
+<p>備註:ShouldBeEquivalentTo與Assert 同為測試驗證的語法</p>
+如果只想驗證Name欄位,不想驗證ID跟CODE欄位則追加 Excluding進行驗證
+<script  type='text/javascript' src=''>
+
+    m1.ShouldBeEquivalentTo(m2,c=>c.Excluding(su=>su.Id)
+    . Excluding(su=>su.Code));
+           
+
+
+
+<p>備註2:參考至</p>
+[https://dotblogs.com.tw/yc421206/2015/06/20/151606](https://dotblogs.com.tw/yc421206/2015/06/20/151606)
 
 ## 新增用來測試的假物件的方式
 在單元測試裡面，新增用來測試的假物件

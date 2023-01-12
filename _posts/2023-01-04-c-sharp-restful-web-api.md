@@ -2,7 +2,7 @@
 layout: post
 title: (尚未整理) C# RestFul Web Api
 date: 2023-01-04 23:36 +0800
-published: false 
+published: true 
 ---
 ## 前言
 <p>這邊紀錄一下我學到的RestFul Web Api的基本技巧與知識</p>
@@ -87,6 +87,33 @@ published: false
         public string BorrowerName { get; set; }//借用人姓名
 
     }
+
+
+### 新增API Controller
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/7.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/8.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/9.png){: width="600" height="500" }
+
+### 定義Route和Http Type
+
+<p>Controller上方要定義Route</p>
+<p>Method上方要定義Http的類型</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/10.png){: width="600" height="500" }
+
+### 改用DTO儲存資料
+<p>DTO是篩選後,最終可以呈現給使用者看得欄位</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/11.png){: width="600" height="500" }
+
+### Method have Parameter
+<p>假設有兩個一樣的Method名稱,但一個回傳陣列,一個回傳陣列內容</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/12.png){: width="600" height="500" }
+
+### 定義回傳狀態
+<p>使用ActionResult將類型包起來</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/13.png){: width="600" height="500" }
+<p>有無使用ActionResult及ProducesResponseType的執行差別</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/14.png){: width="600" height="500" }
+
 
 ### 設定Post/Get
 </p>備註:整理時注意<p>
