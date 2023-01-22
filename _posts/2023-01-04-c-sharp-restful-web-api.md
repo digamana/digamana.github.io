@@ -7,7 +7,7 @@ published: false
 ## 前言
 <p>這邊紀錄一下我學到的RestFul Web Api的基本技巧與知識</p>
 
-## 建立專案
+## 建立API專案
 <p>選擇建立API</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/1.png){: width="600" height="500" }
 <p>設定完後建立</p>
@@ -55,6 +55,7 @@ published: false
 
 ### 建立靜態資料
 <p>建立靜態List,先用靜態資料用來代替資料庫撈取</p>
+<p>因為我想要東西放在Git載下來的時候,不會需要再重新設定資料庫</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/5.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
@@ -213,11 +214,12 @@ published: false
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/26.png){: width="600" height="500" }
 <p></p>
 
-
+## 使用非同步設計方式
 ### Sync to Async
 <p>除了前贅需要+Async之外,要記得使用Task把原本的回傳型態包起來</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/27.png){: width="600" height="500" }
 
+## AutoMapper And Dto
 ### AutoMapper And Dto
 <p>假設這是我的資料庫,可以透過function得到當前資料,並使用Add追加新的資料</p>
 <p>加入await async 也是為了Demo使用非同步處理資料庫</p>
@@ -225,6 +227,7 @@ published: false
 <p>實際使用過程</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/29.png){: width="600" height="500" }
 
+## 標準API回傳類型
 ### 建立標準API回傳類型
 <p>當使用Get/Post之後,總不可能每次都不告知Request是否正常</p>
 <p>首先建立新的Class 用來儲存API Request</p>
@@ -253,7 +256,7 @@ published: false
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/33.png){: width="600" height="500" }
 
 
-## 使用API
+## 建立ASP.NET專案,並調用API
 
 ### 新增ASP.NET專案
 <p>新增傳案</p>
@@ -790,6 +793,14 @@ BaseService.cs
 
 
 ### 建立驗證身分的Controller
+備註:Program.cs記得追加DI注入
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddControllersWithViews();
+    builder.Services.AddHttpClient<IAuthService, AuthService>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
+    var app = builder.Build();
+
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/67.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
@@ -822,7 +833,7 @@ BaseService.cs
 
 
 ### 建立Login頁面
-
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/68.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
     @model CallWebAPI.Model.LoginRequestDTO 
@@ -851,6 +862,191 @@ BaseService.cs
     </form>
     
 
+### 上方Menu追加Login與Logout
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/70.png){: width="600" height="500" }
+
+
+<p>設定Layout_</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/71.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+
+    @using Utility;
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+
+
+    @if (httpAcc.HttpContext.Session.GetString(SD.TokenSession) != null &&
+          httpAcc.HttpContext.Session.GetString(SD.TokenSession).ToString().Length > 0)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+        <a class="nav-link text-dark"  asp-controller="Auth" asp-action="Login">Login</a>
+        </li>
+    }
+
+
+<p>加入DI</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/72.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+### 為了避免Token短期重複產生,需要的設定Cookie驗證
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/69.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddSession(c => { 
+        c.IdleTimeout=TimeSpan.FromMinutes(5);
+        c.Cookie.HttpOnly= true;
+        c.Cookie.IsEssential = true;
+    });
+
+    app.UseSession();
+
+### 將Web專案產生的Token回傳
+<p>將APIRequest補上Token string</p>
+
+### 將Service補上Token參數
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/73.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public interface IDatabaseServices
+    {
+        Task<T> GetAllAsync<T>(string token);
+        Task<T> GetAsync<T>(int id, string token);
+        Task<T> CreatAsync<T>(CreatDevicesDto creatDevicesDto, string token);
+        Task<T> UpdateAsync<T>(UpdataDevicesDto updataDevicesDto, string token);
+        Task<T> Delete<T>(int id, string token);
+    }
+
+
+
+## API與版本控制
+
+### 安裝套件
+<p>Microsoft.AspNetCore.Mvc.Versioning</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/74.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package Microsoft.AspNetCore.Mvc.Versioning -Version 5.0.0
+
+
+
+<p>Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/75.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer -Version 5.0.0
+
+
+
+### API的Program添加Servers設定
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/76.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddApiVersioning(c => {
+        c.AssumeDefaultVersionWhenUnspecified = true; //預設版本啟動
+        c.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1,0);//設定次要版本
+    });
+
+
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/79.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddVersionedApiExplorer(c => {
+        c.GroupNameFormat = "'v'VVV";
+        c.SubstituteApiVersionInUrl = true;
+    });
+
+
+Route
+<script  type='text/javascript' src=''>
+
+    [Route("api/v{version:apiVersion}/Device")]
+
+
+
+
+<p>備註1:設計測試用的API的時候記得要用IEnumerable包住Class回傳,例如附圖這樣</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/84.png){: width="600" height="500" }
+<p>備註2:安裝完套件之後,上面可以Copy的語法都要添加完畢,才能正常啟動API,備註1的方式在沒有使用版控API套件的情況下能正常運作</p>
+
+### Controller添加版本描述
+
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/77.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    [ApiVersion("2.0")]
+
+
+### APIController多版本控制
+
+<p>建立一個新的Controller，並設定其為新版本</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/78.png){: width="600" height="500" }
+
+
+
+
+<p>格式設定補充說明</p>
+
+### 添加不同API版本的描述文檔
+<p>說明達成下圖這種,多個下拉式選單切換不同版本API的方法</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/80.png){: width="600" height="500" }
+
+<p>UseSwaggerUI中,設定SwaggerEndpoint</p>
+<p>AddSwaggerGen中,設定SwaggerDoc</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/81.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddSwaggerGen(c => {
+
+        c.SwaggerDoc("v1",new OpenApiInfo {  Version="描述版本",Title = "標題",Description = "描述" });
+        c.SwaggerDoc("v2", new OpenApiInfo { Version = "描述版本", Title = "標題", Description = "描述" });
+
+    });
+
+    app.UseSwaggerUI(c => {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json","DEVICE_V1");//建立API版本1的文檔
+        c.SwaggerEndpoint("/swagger/v2/swagger.json","DEVICE_V2");//建立API版本2的文檔
+    });
+
+<p>UseSwaggerUI補充說明</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/82.png){: width="600" height="500" }
+<p>AddSwaggerGen和SwaggerEndpoint的補充說明</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/83.png){: width="600" height="500" }
+
+### 跨版本通用Controller
+<p>如果有個APIController底下的Method是不需要考慮版控,例如API登入系統的Controller,則用下圖的方式設計</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/85.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    [ApiVersionNeutral]
+
+
+## API與暫存
+<p>如下圖所示,在Program.cs設定暫存規則,並在Controller實施</p>
+<p>備註:下圖的30指的是30秒</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/86.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddControllers(c =>
+    {
+        c.CacheProfiles.Add("30sCache", new Microsoft.AspNetCore.Mvc.CacheProfile {Duration=30 });
+    });
+
+
+Controller.cs
+<script  type='text/javascript' src=''>
+
+    [ResponseCache(CacheProfileName = "30sCache")]
+
+
+
 ### 設定Post/Get
 
 
@@ -864,17 +1060,9 @@ BaseService.cs
 [https://blog.csdn.net/weixin_52437470/article/details/113726646](https://blog.csdn.net/weixin_52437470/article/details/113726646)
 
 
-## Web專案中,實現Token驗證
+ 
 
-
-### 建立存取登入系統的Repository
-
-### 建立登入用的Controller
-
-### 建立登入頁面
-
-
-### 加入Log紀錄資訊的方式
+## 加入Log紀錄資訊的方式
 <p>因為以內建DI 所以不需要額外再宣告新物件,使用方式如下</p>
 <p>宣告方式</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/008.png){: width="600" height="500" }
@@ -883,10 +1071,10 @@ BaseService.cs
 <p>呈現Log資訊的位置</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/010.png){: width="600" height="500" }
 
-### 自定義DI注入的Mapping類別的方式
+## 自定義DI注入的Mapping類別的方式
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/011.png){: width="600" height="500" }
 
-### 實體框架注入ConnectString的方式
+## 實體框架注入ConnectString的方式
 <p>.NET Core 與 .Net Framework不同,無法使用ADO.NET 快速建立已存在的資料庫模型,替代方案詳見以下網址參考</p>
 [https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c](https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c)
 [https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx](https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx)
