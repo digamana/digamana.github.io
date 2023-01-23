@@ -14,7 +14,7 @@ published: false
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/2.png){: width="600" height="500" }
 
 ## 情境說明
-<p>假設有個儲存設備資訊的資料表，如圖所示</p>
+<p>假設有個儲存設備資訊的資料表， 如圖所示</p>
 <p>備註：後面所用到DTO,所以這邊資料表若欄位不多,將無法彰顯DTO的意義</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/3.png){: width="600" height="500" }
 ## API基本觀念
