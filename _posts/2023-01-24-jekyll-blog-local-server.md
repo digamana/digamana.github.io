@@ -1,8 +1,12 @@
 ---
 layout: post
-title: jekyll blog local server
+title: Jekyll Blog Local Server 安裝步驟
 date: 2023-01-24 00:54 +0800
 ---
+
+## 懶人包
+<p>把下面所有有用到的安裝檔和Chirpy專案,都丟到同個壓縮檔了 </p>
+[https://drive.google.com/drive/folders/1PH_WtigNRmPxKDC-x2vqz4Ua85W6YnRm?usp=share_link](https://drive.google.com/drive/folders/1PH_WtigNRmPxKDC-x2vqz4Ua85W6YnRm?usp=share_link)
 
 ## Ruby+Devkit
 <p>下載Ruby+Devkit 3.1.3-1 (x64) </p>
@@ -36,6 +40,9 @@ date: 2023-01-24 00:54 +0800
     bundle
 
 
+## 安裝Git Gui
+<p>為了附上Git的環境變數,所以安裝完後要重開機</p>
+[https://git-scm.com/download/gui/windows](https://git-scm.com/download/gui/windows)
 
 ## 啟動Server
 <p>到專案的目錄底下</p>
