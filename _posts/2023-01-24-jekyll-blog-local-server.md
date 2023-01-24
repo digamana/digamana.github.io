@@ -10,8 +10,9 @@ date: 2023-01-24 00:54 +0800
 
 ## Ruby+Devkit
 <p>下載Ruby+Devkit 3.1.3-1 (x64) </p>
-![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/1.png){: width="600" height="500" }
 [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/)
+![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/1.png){: width="600" height="500" }
+
 
 <p>安裝完以後,要勾選Run ridk install </p>
 ![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/7.png){: width="600" height="500" }
@@ -19,10 +20,11 @@ date: 2023-01-24 00:54 +0800
 ![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/8.png){: width="600" height="500" }
 
 ## 安裝RubyGems
+[https://rubygems.org/pages/download](https://rubygems.org/pages/download)
 ![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/2.png){: width="600" height="500" }
 ![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/3.png){: width="600" height="500" }
 <p>安裝完Ruby+Devkit ,就能執行setup.rb了</p>
-[https://rubygems.org/pages/download](https://rubygems.org/pages/download)
+
 ## 安裝Jekyll
 <p>使用cmd安裝Jekyll</p>
 ![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/4.png){: width="600" height="500" }
@@ -41,7 +43,7 @@ date: 2023-01-24 00:54 +0800
 
 
 ## 安裝Git Gui
-<p>為了附上Git的環境變數,所以安裝完後要重開機</p>
+<p>因為是為了附上Git的環境變數,所以安裝完後要重開機</p>
 [https://git-scm.com/download/gui/windows](https://git-scm.com/download/gui/windows)
 
 ## 啟動Server
