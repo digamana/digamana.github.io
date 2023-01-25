@@ -2,16 +2,11 @@
 layout: post
 title: (尚未整理) C# RestFul Web Api
 date: 2023-01-04 23:36 +0800
-published: false 
+published: true 
 ---
 ## 前言
 <p>這邊紀錄一下我學到的RestFul Web Api的基本技巧與知識</p>
 
-## 建立API專案
-<p>選擇建立API</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/1.png){: width="600" height="500" }
-<p>設定完後建立</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/2.png){: width="600" height="500" }
 
 ## 情境說明
 <p>假設有個儲存設備資訊的資料表， 如圖所示</p>
@@ -214,12 +209,10 @@ published: false
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/26.png){: width="600" height="500" }
 <p></p>
 
-## 使用非同步設計方式
 ### Sync to Async
 <p>除了前贅需要+Async之外,要記得使用Task把原本的回傳型態包起來</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/27.png){: width="600" height="500" }
 
-## AutoMapper And Dto
 ### AutoMapper And Dto
 <p>假設這是我的資料庫,可以透過function得到當前資料,並使用Add追加新的資料</p>
 <p>加入await async 也是為了Demo使用非同步處理資料庫</p>
@@ -255,13 +248,93 @@ published: false
 <p>為了避免調用資料有甚麼意外狀況,所以要加入TryCatch</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/33.png){: width="600" height="500" }
 
-## API專案中,實現Token驗證
+## 建立API專案中,並實現Token驗證
 
 <p>一般來說使用別人的API時,別人會提供Token以便進行身分驗證,畢竟毫無限制地讓任何都能操作CRUD</p>
 <p>這邊DEMO自己生成Token並進行驗證的方式,以便了解相關知識</p>
 <p>備註: 實際上需要與資料庫串接,但這邊我只想練習DEMO與Token相關的技巧,所以讀取資料庫的操作,會就直接用靜態List來代替</p>
 <p>所以假設這List裡面的資料,是資料庫裡面的資料</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/48.png){: width="600" height="500" }
+### 建立API專案
+<p>選擇建立API</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/1.png){: width="600" height="500" }
+<p>設定完後建立</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/2.png){: width="600" height="500" }
+
+### 建立商業邏輯Dto
+如下
+<script  type='text/javascript' src=''>
+
+    //CreatDevicesDto.cs
+    public class CreatDevicesDto
+    {
+        public int Id { get; set; }
+        public int DeviceTypeId { get; set; } //設備類型
+        public string ItemName { get; set; } //設備品名
+        public string ItemDescription { get; set; } //物品描述
+    }
+    //Devices.cs
+    public class Devices
+    {
+        public int Id { get; set; }
+        public int DeviceTypeId { get; set; } //設備類型
+        public string ItemName { get; set; } //設備品名
+        public string ItemDescription { get; set; } //物品描述
+        public string PCName { get; set; } //電腦名稱
+        public string AssetId { get; set; } //設備編號
+        public int DeviceStatusId { get; set; }//狀態Id
+        public int LocationId { get; set; } //設備ID
+        public DateTime? WarehousingDate { get; set; } //入庫時間
+        public string Custodian { get; set; } //保管人-代號
+        public string CustodianName { get; set; }//保管人-姓名
+        public string Department { get; set; }//部門編號
+        public string DepartmentName { get; set; }//部門名稱
+        public string Brand { get; set; }//設備品牌1
+        public string Model { get; set; }//設備品牌2
+        public string SerialNo { get; set; }//設備序號
+        public string System { get; set; }//系統
+        public string Ram { get; set; }//RAM
+        public string Disk { get; set; }//硬碟
+        public string OfficeVersion { get; set; }//Office版本
+        public string Mac01 { get; set; }//無線Mac
+        public string Mac02 { get; set; }//有線Mac
+        public string Remark { get; set; }//備註
+        public string Borrower { get; set; }//借用人工號
+        public string BorrowerName { get; set; }//借用人姓名
+        public DateTime? BorrowingDate { get; set; }//借用日期
+    }
+    //DevicesDto.cs
+    public class DevicesDto
+    {
+        public string AssetId { get; set; }// 財產編號
+        public string ItemName { get; set; }// 描述
+        public string ItemDescription { get; set; }// 部門
+        public string DepartmentId { get; set; }// 部門ID
+        public string Department { get; set; }// 部門
+        public string Borrower { get; set; }//借用人工號
+        public string BorrowerName { get; set; }//借用人姓名
+    }
+
+### 建立商業邏輯假資料
+如下
+<script  type='text/javascript' src=''>
+
+    //DeviceStore.cs
+    public class DeviceList
+    {
+        public async Task<List<DevicesDto>> GetDevices()
+        {
+            return  new List<DevicesDto> {
+            new DevicesDto() {ItemName="Server 伺服器",ItemDescription="型號A00",AssetId="1001",Borrower="",BorrowerName="",Department=""},
+            new DevicesDto() {ItemName="筆電A",ItemDescription="型號A01",AssetId="1101",Borrower="",BorrowerName="",Department="" },
+            new DevicesDto() {ItemName="桌電A",ItemDescription="型號A02",AssetId="1010",Borrower="",BorrowerName="",Department="" },
+            new DevicesDto() {ItemName="顯示器A",ItemDescription="型號A03",AssetId="1011",Borrower="",BorrowerName="",Department="" },
+            new DevicesDto() {ItemName="投影機A",ItemDescription="型號A04",AssetId="1111",Borrower="",BorrowerName="",Department="" }
+            };
+        }
+    }
+
+
 
 ### 建立登入系統
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/45.png){: width="600" height="500" }
@@ -477,14 +550,34 @@ published: false
 也可以使用下列語句測試
 <script  type='text/javascript' src=''>
 
-    [Route("api/Student")]
+    [Route("api/Device")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class DeviceController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<string> GetStrings()
+        protected APIResponse _response;
+
+        public DeviceController()
         {
-            return new string[] {"aaa","bbb","ccc","ddd", "aaa1", "bbb2", "ccc3", "ddd4" };
+            this._response = new APIResponse();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<APIResponse>> GetDevices() 
+        {
+            try
+            {
+                var result = await new DeviceList().GetDevices();
+                _response.Result = result;
+                _response.HttpStatusCode = System.Net.HttpStatusCode.OK;
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess= false;
+                _response.ErrMessage =new List<string>() { ex.ToString()};
+            }
+            return _response;
         }
     }
 
@@ -554,6 +647,13 @@ published: false
         });
     });
 
+### 啟用UseAuthentication
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/92.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    app.UseAuthentication();
+
+
 
 ### 手動測試有效Token
 <p>因為Token本身就是確保安全性的機制,所以若不照以下流程操作測試,直接使用API只會收到401或403錯誤代號</p>
@@ -569,6 +669,21 @@ published: false
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/60.png){: width="600" height="500" }
 <p>執行須有Admin權限的API</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/63.png){: width="600" height="500" }
+
+
+## ASP.NET專案,建立Dto
+### 新增ASP.NET專案
+<p>新增傳案</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/34.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/35.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/36.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/37.png){: width="600" height="500" }
+<p>建好後,順帶將DTO跟APIResponse 複製到專案中,調用時API,這些都是一定會用到的東西</p>
+<p>因為是DEMO所以直接COPY比較快,</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/38.png){: width="600" height="500" }
+
+
+
 ### 建立登入系統的Dto
 
  ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/64.png){: width="600" height="500" }
@@ -605,191 +720,6 @@ published: false
         public string Role { get; set; }
     }
 
-
-### 建立驗證身分的Service
-
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/65.png){: width="600" height="500" }
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/66.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    public interface IAuthService
-    {
-        Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDTO);
-        Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDTO);
-    }
-    public class AuthService :BaseService, IAuthService
-    {
-        private readonly IHttpClientFactory  _authService;
-        private string BaseUrl;
-        public AuthService(IHttpClientFactory httpClientFactory,IConfiguration configuration):base(httpClientFactory)
-        {
-            _authService = httpClientFactory;
-            BaseUrl = configuration.GetValue<string>("ServiceUrls:BuildWebAPI");
-        }
-
-        public Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDTO)
-        {
-            var result = new APIRequest()
-            {
-                ApiType = SD.ApiType.Post,
-                Data = loginRequestDTO,
-                URL = BaseUrl + "api/Users/login"
-            };
-            return SendAsync<T>(result);
-        }
-
-        public Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDTO)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-### 建立驗證身分的Controller
-備註:Program.cs記得追加DI注入
-<script  type='text/javascript' src=''>
-
-    builder.Services.AddControllersWithViews();
-    builder.Services.AddHttpClient<IAuthService, AuthService>();
-    builder.Services.AddScoped<IAuthService, AuthService>();
-    var app = builder.Build();
-
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/67.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    public class AuthController : Controller
-    {
-        private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
-        {
-            _authService = authService;
-        }
-        [HttpGet]
-        public IActionResult Login()
-        { 
-            LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
-            return View(loginRequestDTO);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRequestDTO loginRequestDTO)
-        {
-           
-            return View();
-        }
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-    }
-
-
-### 建立Login頁面
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/68.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    @model CallWebAPI.Model.LoginRequestDTO 
-
-    <form method="post">
-        <div class="container border-4">
-            <div class="row text-center>
-                <h1>Login</h1>
-            </div>
-            <div class="row text-center>
-                <div asp-validation-summary="All"  class="text-danger"></div>
-            </div>
-            <div class="row">
-                <div class="col-6 offset-3 pb-2">
-                        <input asp-for="UserName" class="form-control" type="text" />
-                </div>
-                <div class="col-6 offset-3 pb-2">
-                    <input asp-for="Password" class="form-control"type="text" />
-                </div>
-                <div class="col-6 offset-3 pb-2">
-                    <button type="submit" value="submit"> Login</button>
-                </div>
-
-            </div>
-        </div>
-    </form>
-    
-
-### 上方Menu追加Login與Logout
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/70.png){: width="600" height="500" }
-
-
-<p>設定Layout_</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/71.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-
-    @using Utility;
-    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
-
-
-    @if (httpAcc.HttpContext.Session.GetString(SD.TokenSession) != null &&
-          httpAcc.HttpContext.Session.GetString(SD.TokenSession).ToString().Length > 0)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout">Logout</a>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-        <a class="nav-link text-dark"  asp-controller="Auth" asp-action="Login">Login</a>
-        </li>
-    }
-
-
-<p>加入DI</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/72.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-### 為了避免Token短期重複產生,需要的設定Cookie驗證
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/69.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    builder.Services.AddSession(c => { 
-        c.IdleTimeout=TimeSpan.FromMinutes(5);
-        c.Cookie.HttpOnly= true;
-        c.Cookie.IsEssential = true;
-    });
-
-    app.UseSession();
-
-### 將Web專案產生的Token回傳
-<p>將APIRequest補上Token string</p>
-
-### 將Service補上Token參數
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/73.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    public interface IDatabaseServices
-    {
-        Task<T> GetAllAsync<T>(string token);
-        Task<T> GetAsync<T>(int id, string token);
-        Task<T> CreatAsync<T>(CreatDevicesDto creatDevicesDto, string token);
-        Task<T> UpdateAsync<T>(UpdataDevicesDto updataDevicesDto, string token);
-        Task<T> Delete<T>(int id, string token);
-    }
-
-
-## 建立ASP.NET專案,並調用API
-
-### 新增ASP.NET專案
-<p>新增傳案</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/34.png){: width="600" height="500" }
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/35.png){: width="600" height="500" }
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/36.png){: width="600" height="500" }
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/37.png){: width="600" height="500" }
-<p>建好後,順帶將DTO跟APIResponse 複製到專案中,調用時API,這些都是一定會用到的東西</p>
-<p>因為是DEMO所以直接COPY比較快,</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/38.png){: width="600" height="500" }
-
 ### 建立調用Https的enum
 <p>可以新增共用類別的Dll,將enum放進裡面</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/39.png){: width="600" height="500" }
@@ -804,54 +734,8 @@ published: false
             Put,
             Delete
         }
+        public static string TokenSession = "JWTToken";
     }
-
-### 建立登入系統
-如下
-<script  type='text/javascript' src=''>
-
-    //LoginRequestDTO.cs
-    public class LoginRequestDTO
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-    }
-    //LoginResponseDTO.cs
-    public class LoginResponseDTO
-    {
-        public UserDTO User { get; set; }
-        public string Token { get; set; }
-    }
-    //RegisterRequestDTO.cs
-    public class RegisterRequestDTO
-    {
-        public string UserName { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-    }
-    //UserDTO.cs
-    public class UserDTO
-    {
-        public int id { get; set; }
-        public string UserName { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-    }
-
-
-### 建立驗證登入的Service
-如下
-<script  type='text/javascript' src=''>
-
-    public interface IAuthService
-    {
-        Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDTO);
-        Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDTO);
-    }
-
-### 建立驗證登入的Controller
 
 
 ### 建立標準API請求類型
@@ -878,17 +762,6 @@ published: false
         public object Result { get; set; }
     }
 
-
-### 在appsettings.json定義要用的API網址
-<p>首先需要在ASP.NET網頁專案的JSON中,定義要使用的API的網址</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/41.png){: width="600" height="500" }
-<script  type='text/javascript' src=''>
-
-    "ServiceUrls": {
-      "BuildWebAPI": "https://localhost:7038"
-    },
-
-
 ### 安裝Newtonsoft.Json
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/90.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
@@ -896,23 +769,19 @@ published: false
     NuGet\Install-Package Newtonsoft.Json -Version 13.0.2
 
 
-
+## ASP.NET專案,建立API Service
 ### 建立通用API Service
 <p>先建立Services資料夾,結構長這樣</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/016.png){: width="600" height="500" }
 IBaseService.cs
 <script  type='text/javascript' src=''>
 
-    using CallWebAPI.Model;
-
-    namespace CallWebAPI.Services.IServices
+    public interface IBaseService
     {
-        public interface IBaseService
-        {
-            APIRequest apiRequest { get; set; }
-            Task<T> SendAsync<T>(APIRequest apiRequest);
-        }
+        APIRequest apiRequest { get; set; }
+        Task<T> SendAsync<T>(APIRequest apiRequest);
     }
+
 
 BaseService.cs
 <script  type='text/javascript' src=''>
@@ -980,9 +849,40 @@ BaseService.cs
         }
     }
 
+### 建立商業邏輯API Service
+如下
+<script  type='text/javascript' src=''>
 
 
-### 實現通用API Service
+    //CreatDevicesDto.cs
+    public class CreatDevicesDto
+    {
+        public int Id { get; set; }
+        public int DeviceTypeId { get; set; } //設備類型
+        public string ItemName { get; set; } //設備品名
+        public string ItemDescription { get; set; } //物品描述
+    }
+    //UpdataDevicesDto.cs
+    public class UpdataDevicesDto
+    {
+        public int Id { get; set; }
+        public string PCName { get; set; } //電腦名稱
+        public string AssetId { get; set; } //設備編號
+    }
+    //DevicesDto.cs
+    public class DevicesDto
+    {
+        public string AssetId { get; set; }// 財產編號
+        public string ItemName { get; set; }// 描述
+        public string ItemDescription { get; set; }// 部門
+        public string DepartmentId { get; set; }// 部門ID
+        public string Department { get; set; }// 部門
+        public string Borrower { get; set; }//借用人工號
+        public string BorrowerName { get; set; }//借用人姓名
+    }
+
+
+### 建立商業邏輯API Service
 
 <p>建立操作資料庫CRUD相關的Service</p>
 <p>建立interface,因為需要傳入token進行驗證,所以會多個傳入token的參數</p>
@@ -1067,50 +967,300 @@ BaseService.cs
 
 <p>補充說明:字串來源要客製化維護</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/91.png){: width="600" height="500" }
-### 建立SessionToken字串
-<script  type='text/javascript' src=''>
 
-    public static string TokenSession = "JWTToken";
-
-
-
-### 注入DI
+### 注入DI:商業邏輯Services
 如下
 <script  type='text/javascript' src=''>
 
     builder.Services.AddScoped<IDatabaseServices, DatabaseServices>();
 
-### 使用通用API Service
-<p>建立調用API Service的Controller</p>
-![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/44.png){: width="600" height="500" }
+
+
+### 建立驗證身分的Service
+
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/65.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/66.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
-    using CallWebAPI.Model;
-    using CallWebAPI.Services.IServices;
-    using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json;
-
-    namespace CallWebAPI.Pages
+    public interface IAuthService
     {
-        public class DeviceController : Controller
+        Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDTO);
+        Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDTO);
+    }
+    public class AuthService :BaseService, IAuthService
+    {
+        private readonly IHttpClientFactory  _authService;
+        private string BaseUrl;
+        public AuthService(IHttpClientFactory httpClientFactory,IConfiguration configuration):base(httpClientFactory)
         {
-            private readonly IDatabaseServices _databaseServices;
-            public DeviceController(IDatabaseServices databaseServices)
+            _authService = httpClientFactory;
+            BaseUrl = configuration.GetValue<string>("ServiceUrls:BuildWebAPI");
+        }
+
+        public Task<T> LoginAsync<T>(LoginRequestDTO loginRequestDTO)
+        {
+            var result = new APIRequest()
             {
-                _databaseServices = databaseServices;
-            }
-            public async Task<IActionResult>  Index()
-            {
-                List<DevicesDto> lst = new List<DevicesDto>();
-                var response = await _databaseServices.GetAllAsync<APIResponse>();
-                if (response != null && response.IsSuccess)
-                {
-                    lst = JsonConvert.DeserializeObject<List<DevicesDto>>(Convert.ToString(response.Result));
-                }
-                return View(lst);
-            }
+                ApiType = SD.ApiType.Post,
+                Data = loginRequestDTO,
+                URL = BaseUrl + "/api/Users/login"
+            };
+            return SendAsync<T>(result);
+        }
+
+        public Task<T> RegisterAsync<T>(RegisterRequestDTO registerRequestDTO)
+        {
+            throw new NotImplementedException();
         }
     }
+
+### 注入DI:驗證身分的Services
+如下
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddHttpClient<IAuthService, AuthService>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
+
+## ASP.NET專案,建立Controller與Razor
+### 在appsettings.json定義要用的API網址
+<p>首先需要在ASP.NET網頁專案的JSON中,定義要使用的API的網址</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/41.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    "ServiceUrls": {
+      "BuildWebAPI": "https://localhost:7038"
+    },
+
+
+### 建立驗證身分的Controller
+<p>備註1:如果API跟ASP在同個方案總管底下,記得要同時啟動專案</p>
+備註2:Program.cs記得追加DI注入
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddControllersWithViews();
+    builder.Services.AddHttpClient<IAuthService, AuthService>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
+    var app = builder.Build();
+
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/67.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public class AuthController : Controller
+    {
+        private readonly IAuthService _authService;
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Login()
+        { 
+            LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+            return View(loginRequestDTO);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginRequestDTO loginRequestDTO)
+        {
+            APIResponse Response = await _authService.LoginAsync<APIResponse>(loginRequestDTO);
+            if (Response != null && Response.IsSuccess == true)
+            {
+                LoginResponseDTO model = JsonConvert.DeserializeObject<LoginResponseDTO>($"{Response.Result}");
+                
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, model.User.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, model.User.Role));
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                HttpContext.Session.SetString(SD.TokenSession, model.Token);
+                return RedirectToAction("Index","Home");
+            }
+            return View();
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.SetString(SD.TokenSession,string.Empty);
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+    }
+
+
+### 建立驗證身分的Login頁面
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/68.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    @model CallWebAPI.Model.LoginRequestDTO 
+
+    <form method="post">
+        <div class="container border-4">
+            <div class="row text-center>
+                <h1>Login</h1>
+            </div>
+            <div class="row text-center>
+                <div asp-validation-summary="All"  class="text-danger"></div>
+            </div>
+            <div class="row">
+                <div class="col-6 offset-3 pb-2">
+                        <input asp-for="UserName" class="form-control" type="text" />
+                </div>
+                <div class="col-6 offset-3 pb-2">
+                    <input asp-for="Password" class="form-control"type="text" />
+                </div>
+                <div class="col-6 offset-3 pb-2">
+                    <button type="submit" value="submit"> Login</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    @section Scripts{
+    <partial name="_ValidationScriptsPartial">
+    }
+
+### 建立商業邏輯Controller
+如下
+<script  type='text/javascript' src=''>
+
+    public class DatabaseController : Controller
+    {
+        private IDatabaseServices _databaseServices;
+        public DatabaseController(IDatabaseServices databaseServices)
+        {
+            _databaseServices = databaseServices;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> IndexDB()
+        {
+            List<DevicesDto> list = new List<DevicesDto>();
+            var response = await _databaseServices.GetAllAsync<APIResponse>( HttpContext.Session.GetString(SD.TokenSession));
+            if (response != null && response.IsSuccess)
+            {
+                list = JsonConvert.DeserializeObject<List<DevicesDto>>($"{response.Result}");
+            }
+            return View(list);  
+        }
+    }
+
+### 建立商業邏輯頁面
+如下
+<script  type='text/javascript' src=''>
+
+    @model IEnumerable<CallWebAPI.Model.DevicesDto> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ItemName
+                </th>
+                <th>
+                    AssetId
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.AssetId</td>
+            </tr>
+        
+                }
+        </tbody>
+    </table>
+
+
+
+### 建立SessionToken字串
+如下
+<script  type='text/javascript' src=''>
+
+    public static string TokenSession = "JWTToken";
+
+
+### 上方Menu追加Login與Logout
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/70.png){: width="600" height="500" }
+
+
+<p>設定Layout_</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/71.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+
+    @using Utility;
+    @inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+
+
+    @if (httpAcc.HttpContext.Session.GetString(SD.TokenSession) != null &&
+          httpAcc.HttpContext.Session.GetString(SD.TokenSession).ToString().Length > 0)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Auth" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+        <a class="nav-link text-dark"  asp-controller="Auth" asp-action="Login">Login</a>
+        </li>
+    }
+
+
+<p>加入DI</p>
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/72.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+### 為了避免Token短期重複產生,需要的設定Cookie驗證
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/69.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(c => { 
+    c.Cookie.HttpOnly= true;
+        c.ExpireTimeSpan=TimeSpan.FromMinutes(5);
+        c.SlidingExpiration = true;
+        c.LoginPath = "/Auth/Login";//根據驗證身分的網址變更
+    });
+    builder.Services.AddSession(c => { 
+        c.IdleTimeout=TimeSpan.FromMinutes(5);
+        c.Cookie.HttpOnly= true;
+        c.Cookie.IsEssential = true;
+    });
+
+    app.UseSession();
+
+### 將Web專案產生的Token回傳
+<p>將APIRequest補上Token string</p>
+
+### 將Service補上Token參數
+![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/73.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    public interface IDatabaseServices
+    {
+        Task<T> GetAllAsync<T>(string token);
+        Task<T> GetAsync<T>(int id, string token);
+        Task<T> CreatAsync<T>(CreatDevicesDto creatDevicesDto, string token);
+        Task<T> UpdateAsync<T>(UpdataDevicesDto updataDevicesDto, string token);
+        Task<T> Delete<T>(int id, string token);
+    }
+
 
 
 ## API與版本控制
