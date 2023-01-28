@@ -1,6 +1,6 @@
 ---
 layout: post
-title: (尚未整理) C# RestFul Web Api
+title: C# RestFul Web Api
 date: 2023-01-04 23:36 +0800
 published: true 
 ---
@@ -10,7 +10,7 @@ published: true
 
 ## 情境說明
 <p>假設有個儲存設備資訊的資料表， 如圖所示</p>
-<p>備註：後面所用到DTO,所以這邊資料表若欄位不多,將無法彰顯DTO的意義</p>
+<p>備註：後面會用到DTO,所以這邊資料表若欄位不多,將無法彰顯DTO的意義</p>
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/3.png){: width="600" height="500" }
 ## API基本觀念
 <p>新增Model資料夾,在裡面新增Device.cs</p>
