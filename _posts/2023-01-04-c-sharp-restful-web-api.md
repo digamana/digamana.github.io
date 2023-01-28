@@ -544,7 +544,7 @@ published: true
 ![Desktop View](/assets/img/2023-01-04-c-sharp-restful-web-api/59.png){: width="600" height="500" }
 
 ## API與角色權限
-[繼"API專案中,實現Token驗證"之後的延伸設定](#api專案中,實現token驗證)
+
 ### 建立簡單的API
 
 也可以使用下列語句測試
