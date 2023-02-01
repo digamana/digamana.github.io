@@ -36,7 +36,7 @@ date: 2023-01-25 22:38 +0800
 ![Desktop View](/assets/img/2023-01-25-asp-net-core-use-code-first-if-database-exist/4.png){: width="600" height="500" }
  <script  type='text/javascript' src=''>
 
-    Scaffold-DbContext "Server=DESKTOP-LF7SA0P\SQLEXPRESS;Database=School;Trusted_Connection=True;MultipleActiveResultSets=true;User ID=sa;Password=aaa12345" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+    Scaffold-DbContext "Server=DESKTOP-LF7SA0P\SQLEXPRESS;Database=School;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true;User ID=sa;Password=aaa12345" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
 
 
 ### 指令說明
