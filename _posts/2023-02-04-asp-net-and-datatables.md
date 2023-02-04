@@ -294,6 +294,7 @@ date: 2023-02-04 13:08 +0800
 <p>備註2:「success: function (data)」 的data是透過PartialView回傳的Html</p>
 <p>備註3:「$("#this-modal-dialog").html(data)」的html方法是用來取代html用的,所以參數塞的是html</p>
 ![Desktop View](/assets/img/2023-02-04-asp-net-and-datatables/20.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-02-04-asp-net-and-datatables/28.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
     $dataTable.on('click', '.MyEdit-btn', function (e) {
@@ -322,6 +323,20 @@ date: 2023-02-04 13:08 +0800
 
 <p>加入要傳遞給PartialView顯示的資料,將Edit的Method改為以下</p>
 ![Desktop View](/assets/img/2023-02-04-asp-net-and-datatables/24.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    [HttpGet]
+    public ActionResult Edit(string temp)
+    {
+        var result = new List<Device>();
+        result.Add(new Device { Id = 1, ItemDescription = "華碩", ItemName = "電腦" });
+        result.Add(new Device { Id = 2, ItemDescription = "蘋果", ItemName = "手機" });
+        var result2 = result.Where(c => c.ItemDescription == temp).FirstOrDefault();
+
+        return PartialView("_PartialViewEdit", result2);
+    }
+
+
 <p>建立PartialView</p>
 ![Desktop View](/assets/img/2023-02-04-asp-net-and-datatables/23.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
@@ -379,7 +394,7 @@ date: 2023-02-04 13:08 +0800
     [ValidateAntiForgeryToken]
     public ActionResult Edit(Device DevicesDto)
     {
-        return Json("");
+        return RedirectToAction("ShowDataTables");
     }
 
 
