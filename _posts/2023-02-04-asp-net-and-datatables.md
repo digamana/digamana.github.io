@@ -385,6 +385,10 @@ date: 2023-02-04 13:08 +0800
 
 <p>資料驗證呈現</p>
 ![Desktop View](/assets/img/2023-02-04-asp-net-and-datatables/27.png){: width="600" height="500" }
+
+## GitHub
+[https://github.com/digamana/NetCoreDatatablesDemoRepo](https://github.com/digamana/NetCoreDatatablesDemoRepo)
+
 ## 參考
 [https://datatables.net/](https://datatables.net/)
 [https://getbootstrap.com/docs/5.3/components/modal/#how-it-works](https://getbootstrap.com/docs/5.3/components/modal/#how-it-works)
