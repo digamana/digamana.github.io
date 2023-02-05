@@ -364,7 +364,7 @@ date: 2023-02-04 13:08 +0800
                         <div class="col-6">
                             <div class="form-group">
                                 @Html.LabelFor(x => x.ItemDescription, new { @class = "col-form-label" })
-                                @Html.TextBoxFor(x => x.ItemDescription, new { @class = "form-control" })
+                                @Html.TextBoxFor(x => x.ItemDescription, new Dictionary<string, object> { { "class ", "form-control" } })
                             </div>
                         </div>
                     </div>
