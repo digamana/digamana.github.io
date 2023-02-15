@@ -482,6 +482,26 @@ Microsoft.Office.Interop.Excel的轉檔Function
     workSheet.Dimension.End.Row
 
 
+新增Excel的方式
+<script  type='text/javascript' src=''>
+
+    public void CreatNewExcel()
+    {
+        ExcelPackage excel = new ExcelPackage();
+        var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+        /*
+          * 詳細內容
+          */
+        string p_strPath = Path.Combine("FilePath", $"{DateTime.Now.ToString("yymmddhhmmss")}.xlsx");
+        FileStream objFileStrm = File.Create(p_strPath);
+        objFileStrm.Close();
+        File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+        excel.Dispose();
+        Process.Start(p_strPath);
+    }
+
+
+
 小記
 
 ![Desktop View](/assets/img/2022-11-27-c-sharp-read-excel/6.png){: width="800" height="600" }  

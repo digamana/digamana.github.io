@@ -2,18 +2,18 @@
 layout: post
 title: C# Connect MSSQL Use Dapper
 date: 2022-10-26 15:41 +0800
-categories: [Visual studio And MSSQL,C# CRUD MSSQL Use Dapper]
-tags: [Dapper,C#]
-published: true 
+categories: [Visual studio And MSSQL, C# CRUD MSSQL Use Dapper]
+tags: [Dapper, C#]
+published: true
 ---
 
-## 範例資料表  
+## 範例資料表
+
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect MSSQL Use Dapper/1.png){: width="600" height="500" }  
 上圖中的資料源可從這邊取得  
 Github：https://github.com/digamana/Open-Sql-Data-Source
 
-
-## 安裝Dapper
+## 安裝 Dapper
 
 Use Nuget Setup Dapper  
 ![Desktop View](/assets/img/2022-10-26-C-Sharp Connect MSSQL Use Dapper/2.png){: width="600" height="500" }
@@ -92,6 +92,8 @@ Creat New Class Exmaple：DemoSheet.cs
 
 
 ## 使用Dapper取得DB資料的範例
+
+### 同步
 Use Dapper Get Data Example：
 <script  type='text/javascript' src=''>
 
@@ -128,6 +130,24 @@ Use Dapper Get Data Example：
         }
     }
 
+### 非同步
+
+Use Dapper Get Data Example：
+<script  type='text/javascript' src=''>
+
+    // Task Task1  =Task.Run(() => var temp = GetFactory().Result); //使用方式 
+    // Task.WaitAll(Task1); //非同步等待方式
+    public async Task<IEnumerable<DemoSheet>> GetFactory()
+    {
+        string constr = ConfigurationManager.ConnectionStrings["DemmoDapper"].ConnectionString;
+        using (SqlConnection conn = new SqlConnection(constr))
+        {
+            string strSql_head = $@"Sql_Command";
+    
+            var result = await conn.QueryAsync<DemoSheet>(strSql_head).ConfigureAwait(false);
+            return result;
+        }
+    }
 
 
 ## 在MSSQL中建立Stored Procedure

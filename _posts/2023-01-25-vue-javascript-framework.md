@@ -233,3 +233,138 @@ javaScript插入DOM的方式
         }
     }).mount('#app')
         </script>
+
+### componet的使用方式
+
+如下
+範例如下
+<script  type='text/javascript' src=''>
+
+    <div id="app">
+        <hello></hello>
+        <hello></hello>
+        <hello></hello>
+        </div>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script>
+    let vm = Vue.createApp({
+      //  template: ``
+    })
+
+    vm.component('hello', {
+      template: `<h1>{{ message }}</h1>`,
+      data() {
+        return {
+          message: 'Hello World!'
+        }
+      }
+    })
+
+    vm.mount('#app')
+        </script>
+
+
+
+## 常用工具
+### Vite
+<p>開啟PowerShell，依序輸入紅框中的指令</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/6.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    npm create vite@latest
+
+<p>完成之後，會產出一個vite專案，裡面的資料大致上有這些</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/7.png){: width="600" height="500" }
+<p>可以使用PowerShell啟動Vite Server</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/8.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/9.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    npm run dev
+
+
+<p>「npm run build」可能是產生要放到IIS的檔案,備註:我還沒試過</p>
+
+
+### SASS
+<p>備註:SASS 是用來加速CSS開發</p>
+<p>安裝SASS</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/10.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+     npm install sass
+
+
+
+<p>因為sass是用來加速開發css的語言,所以確定要使用sass的話,原本的副檔名要從css要改成scss</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/11.png){: width="600" height="500" }
+<p>改成sass最大的好處是可以結構化管理css</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/12.png){: width="600" height="500" }
+
+### ESLink
+<p>備註:ESLink 用來檢查JavaScript程式碼是否符合規則</p>
+[https://eslint.org/](https://eslint.org/)
+<p>安裝ESLink </p>
+
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/13.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+     npm install eslint --save-dev
+
+
+<p>為vite配置eslint外掛 </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/14.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+       npm install vite-plugin-eslint --save-dev --force
+
+
+<p>配置ESLink </p>
+
+
+## 快速搭建Vue專案
+### 指令建立初始專案
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/15.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+       npm init vue@latest
+
+
+<p>遷換到專案底下,安裝npm並執行專案</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/16.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+       npm run dev
+
+
+### App.vue的Hello World
+Source Code如下
+<script  type='text/javascript' src=''>
+
+        <template>
+        <p> {{ '{{' }} msg }} </p>
+        </template>
+        <script>
+        export default{
+        name:'測試',
+        data(){
+            return {
+            msg : 'Output Text'
+            }
+        }
+        }
+        </script>
+
+<p>執行結果</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/17.png){: width="600" height="500" }
+
+
+### App.vue的component結構化
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/18.png){: width="600" height="500" }
+
+### App.vue的component傳遞參數
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/19.png){: width="600" height="500" }
+
+
+### App.vue的component傳遞事件
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/20.png){: width="600" height="500" }
