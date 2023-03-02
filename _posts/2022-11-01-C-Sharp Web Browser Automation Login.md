@@ -60,3 +60,11 @@ tags: [C#]
 ![Desktop View](/assets/img/2022-11-01-C-Sharp Web Browser Automation Login/2.png){: width="600" height="500" }   
 執行GIF ，依照上面範例中的帳號密碼的輸入的話，理所當然會在Cick Login之後顯示帳號或密碼錯誤
 ![Desktop View](/assets/img/2022-11-01-C-Sharp Web Browser Automation Login/3.GIF){: width="600" height="500" }  
+
+額外需求補充
+如果要點擊某個button,但是html都長一樣的話,像以下範例一樣,使用XPath彙整出陣列,在進行enter  
+![Desktop View](/assets/img/2022-11-01-C-Sharp Web Browser Automation Login/3.png){: width="600" height="500" } 
+<script  type='text/javascript' src=''>
+
+    IReadOnlyCollection<IWebElement> ConsoleCLI = driver.FindElements(By.XPath("//*[@class='console-controls ng-star-inserted']/button"));
+    ConsoleCLI.ToList()[3].SendKeys(Keys.Enter);

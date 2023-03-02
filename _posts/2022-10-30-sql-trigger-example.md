@@ -105,7 +105,9 @@ Source Code：
 	      DECLARE @UserName varchar(50)
 	      DECLARE @UserEmail varchar(50)
           -- 透過Select來獲得第一項被改變的欄位內容
-	        select @UserID=UserID,@UserName =UserName ,@UserEmail=UserEmail from deleted
+	        select @UserID=UserID,@UserName =UserName ,@UserEmail=UserEmail from deleted    --from deleted紀錄的是被覆蓋的舊數值
+
+          -- select @UserID=UserID,@UserName =UserName ,@UserEmail=UserEmail from INSERTED --from INSERTED紀錄的是要蓋過去的新數值
 
 	        PRINT @UserID
 	        PRINT @UserName
@@ -158,5 +160,65 @@ Source Code：
         GO
 
 
+
+
+## 補充 : Mssql Mail
+
+
+![Desktop View](/assets/img/2022-10-30-sql-trigger-example/4.png){: width="600" height="800" }  
+建立一個一旦內容改變,舊使用MSSQL發信通知的Trigger,Trigger的寫法如下  
+<script  type='text/javascript' src=''>
+
+    USE [DemoTrigger]
+    GO
+
+    /****** Object:  Trigger [dbo].[UserInfo_UpdateTrigger]    Script Date: 2023/3/1 下午 04:55:12 ******/
+    SET ANSI_NULLS ON
+    GO
+
+    SET QUOTED_IDENTIFIER ON
+    GO
+
+    CREATE TRIGGER [dbo].[UserInfo_UpdateTrigger] -- TRIGGER 的名稱
+       ON  [dbo].[UserInfo] -- 指定資料表
+       AFTER UPDATE -- UPDATE 之後觸發，還有 INSERT, DELETE，多個則以 ',' 分隔
+    AS 
+    BEGIN
+        -- 觸發後可寫 if/else 條件
+        -- 下面 if 中包含兩個條件
+        -- 1. UPDATE(欄位名稱)，不論 INSERT 或 UPDATE 嘗試成功與否，UPDATE() 都會傳回 TRUE
+        -- 2. EXISTS 指定測試資料列是否存在的子查詢
+        IF UPDATE([DataCount]) AND EXISTS(SELECT Count(1) FROM [UserInfo] WHERE DataCount > 0)
+        -- if 條件成立則執行
+        BEGIN
+		    DECLARE @mybody varchar (max)
+            DECLARE @userId INT;
+            DECLARE @dataCount INT;
+		    DECLARE @UserName varchar (max);
+            PRINT 'Set log start.'
+            -- 新增資料使用 inseted，刪除資料使用 deleted，更新資料(Update)的話則是都會有
+            SELECT @userId=UserId, @dataCount=DataCount , @UserName=UserName FROM deleted;
+  
+            PRINT 'Set log success.'
+       -- 下面 開始撰寫發信內容
+			    BEGIN
+			    set @mybody = '測試' + CONVERT(varchar(max),@UserId)  + '  ' + CONVERT(varchar(max),@DataCount)  + ' ' +  @UserName;
+			      EXEC msdb.dbo.sp_send_dbmail
+			      @profile_name = 'test',
+			      @recipients = 'q12389@yahoo.com.tw',
+			      @subject = 'Database Record Updated',
+			      @body = @mybody 
+			    end
+        END
+        ELSE
+        -- else 條件成立則執行
+        BEGIN
+            PRINT 'Nothing to do.'
+        END
+    END
+    GO
+
+    ALTER TABLE [dbo].[UserInfo] ENABLE TRIGGER [UserInfo_UpdateTrigger]
+    GO
 
 

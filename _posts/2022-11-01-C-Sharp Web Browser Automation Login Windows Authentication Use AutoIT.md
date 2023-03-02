@@ -87,3 +87,14 @@ AutoIT的Code參數來源
               }
           }
       }
+
+
+
+如果開啟得網頁是http可以使用以下指令點選進階,並進入網頁(自行變更id裡面的內容)
+<script  type='text/javascript' src=''>
+
+    Thread.Sleep(50);
+    driver.FindElement(By.Id("details-button")).SendKeys(Keys.Enter);
+    // IWebElement submitButton = driver.FindElement(By.XPath("//*[@class='secondary-button small-link']"));
+    Thread.Sleep(50);
+    driver.FindElement(By.Id("proceed-link")).SendKeys(Keys.Enter);

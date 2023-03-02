@@ -2,7 +2,7 @@
 layout: post
 title: Vue javascript framework
 date: 2023-01-25 12:21 +0800
-published: false 
+
 ---
 
 
@@ -265,7 +265,7 @@ javaScript插入DOM的方式
 
 
 
-## 常用工具
+## 常用工具-PowerShell
 ### Vite
 <p>開啟PowerShell，依序輸入紅框中的指令</p>
 ![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/6.png){: width="600" height="500" }
@@ -321,6 +321,51 @@ javaScript插入DOM的方式
 
 <p>配置ESLink </p>
 
+## 常用工具-VS Code
+### ESLint
+<p>安裝ESLint </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/21.png){: width="600" height="500" }
+<p>設定儲存時自動格式化 </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/23.png){: width="600" height="500" }
+<p>設定儲存時自動使用ESLint修正語法 </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/25.png){: width="600" height="500" }
+<script  type='text/javascript' src=''>
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+
+
+### vee-validate
+進行驗證用的外掛套件
+在專案底目錄下,使用這指令安裝
+<script  type='text/javascript' src=''>
+
+    npm i vee-validate
+
+
+
+
+
+### Prettier - Code formatter
+<p>Prettier - Code formatter</p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/22.png){: width="600" height="500" }
+<p>設定儲存時自動格式化 </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/24.png){: width="600" height="500" }
+### Tailwind
+### Pinia
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/26.png){: width="600" height="500" }
+
+
+## Html to Vue
+
+### 靜態Html配置到Vue專案中
+
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/27.png){: width="600" height="500" }
+### 結構化各個html部分
+<p>例如移動Header </p>
+<p>建立新的Vue檔,將Header移到新的vue中 </p>
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/28.png){: width="600" height="500" }
 
 ## 快速搭建Vue專案
 ### 指令建立初始專案
@@ -329,6 +374,29 @@ javaScript插入DOM的方式
 
        npm init vue@latest
 
+
+
+### 使用vee-validate驗證資料
+在專案底目錄下,使用這指令安裝vee-validate
+<script  type='text/javascript' src=''>
+
+    npm i vee-validate
+
+
+導入vee-validate
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/29.png){: width="600" height="500" }
+html標籤轉為vee
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/30.png){: width="600" height="500" }
+
+
+安裝驗證規則vee-validate的驗證規則
+<script  type='text/javascript' src=''>
+
+    npm i @vee-validate/rules
+
+
+導入vee-validate/rules
+![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/31.png){: width="600" height="500" }
 
 <p>遷換到專案底下,安裝npm並執行專案</p>
 ![Desktop View](/assets/img/2023-01-25-vue-javascript-framework/16.png){: width="600" height="500" }

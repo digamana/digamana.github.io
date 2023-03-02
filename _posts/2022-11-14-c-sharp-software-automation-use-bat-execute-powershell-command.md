@@ -1,4 +1,4 @@
----
+ㄔㄧ---
 layout: post
 title: C# Software automation Use PowerShell Command
 date: 2022-11-14 11:10 +0800

@@ -56,3 +56,16 @@ Visual Studio Administrator Mode
     AutoItX.ControlClick("Software Title", "", "Control Advanced Mode");
 
 
+## 參考指令
+### 滑鼠
+滑鼠移動到指定座標點擊左鍵的寫法
+<script  type='text/javascript' src=''>
+
+   AutoItX.MouseClick("LEFT", 600, 800, 3, -1);
+
+
+### 鍵盤
+鍵盤「A」點擊2次的寫法
+<script  type='text/javascript' src=''>
+
+   AutoItX.Send(send);
