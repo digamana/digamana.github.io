@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C-Sharp WinForom UI thread and business logic
+title: C# WinForom UI 事件更新元件處理
 date: 2023-02-16 14:21 +0800
 ---
 
