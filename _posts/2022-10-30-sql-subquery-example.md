@@ -59,3 +59,14 @@ Source Code：
 		    FROM [DemoDB].[dbo].[Member]
 		    where UserName like '%CD%'
         ) AS Main on [Member].[UserName] = Main.[UserName]
+
+
+## 建立Table指令
+備註:這跟這篇文章無關,只是我想簡單放個指令而已
+因為這樣我之後就能先在Excel擬好欄位名稱,就直接先快速建表,型態再到介面手動調整,這樣感覺比較有效率
+<script  type='text/javascript' src=''>
+
+    CREATE TABLE [dbo].[TableName](
+	  ColName [varchar](50)  NULL,
+  ) 
+
