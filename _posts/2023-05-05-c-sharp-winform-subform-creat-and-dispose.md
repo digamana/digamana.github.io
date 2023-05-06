@@ -1,6 +1,6 @@
 ---
 layout: post
-title: c-sharp winform subform creat and dispose
+title: C# WinForm開啟子視窗與釋放資料
 date: 2023-05-05 12:20 +0800
 ---
 

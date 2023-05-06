@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C-Sharp-SendMail-Example
+title: C# 寄信範例程式
 date: 2023-04-21 17:45 +0800
 ---
 
