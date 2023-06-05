@@ -60,6 +60,14 @@ Source Code：
 		    where UserName like '%CD%'
         ) AS Main on [Member].[UserName] = Main.[UserName]
 
+## 在From中宣告變數,在進行查詢
+Source Code：
+<script  type='text/javascript' src=''>
+
+    Select  aaa.Id from
+    ( SELECT [id]  ,[name],[mac],[crdate]FROM [School].[dbo].[Device] )as aaa
+
+
 
 ## 建立Table指令
 備註:這跟這篇文章無關,只是我想簡單放個指令而已

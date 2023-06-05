@@ -9,8 +9,10 @@ date: 2023-05-06 16:06 +0800
 有時候在建立C#的Class或Sql的資料表的時候,
 雖然知道欄位的用途及用意,
 但總是會在命名的時候,想不到要如何轉成適當的名稱
-所以想乾脆就直接讓ChatGPT來協助命名
+所以想乾脆就直接讓ChatGPT來協助命名  
 
+
+[https://chat.openai.com/](https://chat.openai.com/)
 ## C# Class指令
 指令如下
 <script  type='text/javascript' src=''>
