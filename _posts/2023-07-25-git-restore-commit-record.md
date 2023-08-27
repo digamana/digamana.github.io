@@ -1,6 +1,6 @@
 ---
 layout: post
-title: git restore commit record
+title: Git Restore Commit Record
 date: 2023-07-25 23:05 +0800
 ---
 
