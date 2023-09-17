@@ -1413,7 +1413,10 @@ Controller.cs
 
 ## 實體框架注入ConnectString的方式
 <p>.NET Core 與 .Net Framework不同,無法使用ADO.NET 快速建立已存在的資料庫模型,替代方案詳見以下網址參考</p>
-[https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c](https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c)
+[https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c](https://stackoverflow.com/questions/70580916/adding-ado-net-entity-framework-gives-the-projects-target-framework-does-not-c)  
 [https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx](https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx)
- 
+
+# 後續API精進知識
+
+[https://ithelp.ithome.com.tw/articles/10267809](https://ithelp.ithome.com.tw/articles/10267809)
 
