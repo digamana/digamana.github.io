@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C-Sharp string[] Filter Sql
+title: C# string[] Filter Sql
 date: 2023-12-11 22:36 +0800
 ---
 ## 前言
