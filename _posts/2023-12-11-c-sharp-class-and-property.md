@@ -54,3 +54,33 @@ date: 2023-12-11 21:45 +0800
         string format = "T_ID;T_NAME;S_ID;S_NAME";
         Shool test = (Shool)stringToBject<Shool>(format);
     }
+
+
+## 靜態擴展
+
+如下Code
+string format = "T_ID;T_NAME;S_ID;S_NAME";
+Shool test = format.ToClass<Shool>() ;
+以上是使用方式
+<script  type='text/javascript' src=''>
+
+    public static class Extensions
+    {
+        public static T ToClass<T>(this string sourceString) where T : class
+        {
+            string[] source = sourceString.Split(';');
+            var target = Activator.CreateInstance(typeof(T).GetTypeInfo());
+            var props = target.GetType().GetProperties();
+            for (int i = 0; i < source.Length; i++)
+            {
+                switch (props[i].PropertyType.FullName.Split('.')[1])
+                {
+                    case "String":
+                        target.GetType().GetProperty(props[i].Name).SetValue(target, source[i]);
+                        break;
+                }
+            }
+            T result = (T)target;
+            return result;
+        }
+    }
