@@ -170,3 +170,41 @@ ChatGPT範例指令
             NamingStrategy = new SnakeCaseNamingStrategy() // 或其他策略，如 CamelCaseNamingStrategy
         }
     };
+
+## 輸入API網址的方式
+
+### 安裝套件
+
+RestSharp
+![Desktop View](/assets/img/2023-09-03-c-sharp-recive-json-use-strong-typing/7.png){: width="800" height="600" }
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package RestSharp -Version 110.2.0
+
+
+使用方式
+<script  type='text/javascript' src=''>
+
+    RestClient client = new RestClient("https://www.binance.com/api/v3/ticker/price");
+    RestRequest request = new RestRequest();
+    var settings = new JsonSerializerSettings
+    {
+        ContractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new SnakeCaseNamingStrategy() // 或其他策略，如 CamelCaseNamingStrategy
+        }
+    };
+    RestResponse response = client.Execute(request);
+    if (response.StatusCode == HttpStatusCode.OK)
+    {
+        var mapsResponse = JsonConvert.DeserializeObject<Price>(response.Content, settings);
+ 
+    }
+    
+    public class Price
+    {
+        [JsonProperty("symbol")]
+        public string symbol { get; set; }
+        [JsonProperty("price")]
+        public string price { get; set; }
+    }

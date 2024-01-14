@@ -59,9 +59,6 @@ date: 2023-12-11 21:45 +0800
 ## 靜態擴展
 
 如下Code
-string format = "T_ID;T_NAME;S_ID;S_NAME";
-Shool test = format.ToClass<Shool>() ;
-以上是使用方式
 <script  type='text/javascript' src=''>
 
     public static class Extensions
@@ -84,3 +81,12 @@ Shool test = format.ToClass<Shool>() ;
             return result;
         }
     }
+
+
+
+以下是使用方式
+<script  type='text/javascript' src=''>
+
+    string format = "T_ID;T_NAME;S_ID;S_NAME"; 
+    Shool test = format.ToClass<Shool>(); 
+
