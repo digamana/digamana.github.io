@@ -154,3 +154,49 @@ date: 2023-12-30 20:58 +0800
 			.ToList();
 			return lst;
 		}
+
+
+## 靜態擴展範例
+
+示範
+<script  type='text/javascript' src=''>
+
+
+    public static class Extension
+    {
+	    /// <summary>
+	    /// DataRow Mapping到 Class 
+	    /// </summary>
+	    /// <typeparam name="T"></typeparam>
+	    /// <param name="row"></param>
+	    /// <returns></returns>
+	    public static T ToClass<T>(this DataRow row) where T : new()
+	    {
+		    T obj = new T();
+		    if (row == null) return obj;
+		    foreach (DataColumn column in row.Table.Columns)
+		    {
+			    PropertyInfo property = typeof(T).GetProperty(column.ColumnName);
+			    if (property != null && row[column] != DBNull.Value)
+			    {
+				    property.SetValue(obj, Convert.ChangeType(row[column], property.PropertyType), null);
+			    }
+		    }
+		    return obj;
+	    }
+	    /// <summary>
+	    /// DataTable 轉 List<T>
+	    /// </summary>
+	    /// <typeparam name="T"></typeparam>
+	    /// <param name="dt"></param>
+	    /// <returns></returns>
+	    public static IEnumerable<T> ToList<T>(this DataTable dt) where T : new()
+	    {
+		    List<T> lst = new List<T>();
+		    foreach (DataRow dr in dt.Rows)
+		    {
+			    var temp = dr.ToClass<T>();
+			    lst.Add(temp);
+		    }
+		    return lst;
+    }
