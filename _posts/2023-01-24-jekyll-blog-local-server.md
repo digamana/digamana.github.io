@@ -164,7 +164,7 @@ Compose.yml
 <p>由於後續我將上面所用到的東西上傳至自己的Docker Hub中</p>
 <p>所以之後可以考慮將Compose.yml的內容更改指定的Image</p>
 <p>在進行以下指令 ,記得cmd要切到Compose.ym的目錄底下</p>
-![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/19.png){: width="600" height="500" }
+![Desktop View](/assets/img/2023-01-24-jekyll-blog-local-server/18.png){: width="600" height="500" }
 <script  type='text/javascript' src=''>
 
     docker-compose up -d
