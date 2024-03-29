@@ -64,6 +64,13 @@ date: 2023-01-24 00:54 +0800
     bundle exec jekyll post "名稱"
 
 
+如果今天在用下方的Docker中新增文章的話,上述指令之後,還要在使用build重建,不然Menu會沒有文章資料
+ <script  type='text/javascript' src=''>
+
+    bundle exec jekyll build
+
+
+
 ## for Windows Docker
 ### 建立DockerFile
 <p>建立檔名DockerFile (無附檔名) </p>
@@ -199,4 +206,8 @@ Compose.yml
     docker run -d -p 4000:4000 -v E:/Coding/作品練習/blog:/app blog-server-container
 
 
+
+### 備註:Windows無法開啟Docker看這裡
+
+[https://cchite.medium.com/window-%E4%B8%8A%E5%AE%89%E8%A3%9D-docker-%E7%9A%84%E5%95%8F%E9%A1%8C%E6%8E%92%E8%A7%A3-a1202bfbcfe9](https://cchite.medium.com/window-%E4%B8%8A%E5%AE%89%E8%A3%9D-docker-%E7%9A%84%E5%95%8F%E9%A1%8C%E6%8E%92%E8%A7%A3-a1202bfbcfe9)
 
