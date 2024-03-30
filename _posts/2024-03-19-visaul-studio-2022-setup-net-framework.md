@@ -20,3 +20,9 @@ date: 2024-03-19 22:09 +0800
 
 
     C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework
+
+
+
+
+<p>快速下載連結</p>
+[https://drive.google.com/drive/folders/100EAto8JX8wEnV-vQyA_HxfDDc8znTw-?usp=sharing](https://drive.google.com/drive/folders/100EAto8JX8wEnV-vQyA_HxfDDc8znTw-?usp=sharing)
