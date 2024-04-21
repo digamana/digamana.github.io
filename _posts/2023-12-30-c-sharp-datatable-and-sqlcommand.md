@@ -207,30 +207,31 @@ date: 2023-12-30 20:58 +0800
 
 
 ### Oracle
+
 示範
 <script  type='text/javascript' src=''>
 
-   public DataTable UseExample(string connStr)
-   {
-       DataTable rtnDT = new DataTable();
-       try
-       {
-           oraclecon = oracleConnetion(connStr);
-           OracleCommand sqlCmdExe = new OracleCommand();
-           string sqlCmd = " SELECT * from demo.user M where  M.DateTimes = :DATES";
-           sqlCmdExe.CommandText = sqlCmd;
-           sqlCmdExe.Parameters.Add(":DATES", OracleType.DateTime).Value = System.DateTime.Now.AddDays(-9).ToString("yyyy/MM/dd");
+     public DataTable UseExample(string connStr)
+     {
+         DataTable rtnDT = new DataTable();
+         try
+         {
+             oraclecon = oracleConnetion(connStr);
+             OracleCommand sqlCmdExe = new OracleCommand();
+             string sqlCmd = " SELECT * from demo.user M where  M.DateTimes = :DATES";
+             sqlCmdExe.CommandText = sqlCmd;
+             sqlCmdExe.Parameters.Add(":DATES", OracleType.DateTime).Value = System.DateTime.Now.AddDays(-9).ToString("yyyy/MM/dd");
           
-           rtnDT = DBReader(oraclecon, sqlCmdExe);
-           rtnDT.TableName = "useDT";
+             rtnDT = DBReader(oraclecon, sqlCmdExe);
+             rtnDT.TableName = "useDT";
 
-       }
-       catch (Exception ex)
-       {
-           Program._publicFun.logWriteCenter("getDBDataSend", ex);
-       }
-       return rtnDT;
-   }
+         }
+         catch (Exception ex)
+         {
+             Program._publicFun.logWriteCenter("getDBDataSend", ex);
+         }
+         return rtnDT;
+     }z
 
     public OracleConnection oracleConnetion(string DataSource)
     {
