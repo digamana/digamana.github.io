@@ -48,3 +48,51 @@ Sol:
             Task.WaitAll(Task1);
         }
     }
+
+
+## BackgroundWorker執行時更新UI控件的靜態擴展
+
+<p>由於有時候需要將Value傳回給UI的執行續,所以需要 </p>
+使用方式
+<script  type='text/javascript' src=''>
+
+    public class main
+    {
+        ComboBox cb = new ComboBox();
+ 
+        void main()
+        {
+            //方法1:使用lambda
+            cb.InvokeIfRequired(() =>
+            {
+                cb.Text = "hello";
+            });
+ 
+            //方法2:使用Action
+            cb.InvokeIfRequired(helloAction);
+        }
+ 
+        void helloAction()
+        {
+            cb.Text = "hello";
+        }
+    }
+
+Sol:
+<script  type='text/javascript' src=''>
+
+    public static class Extensions
+    {
+        //非同步委派更新UI
+        public static void InvokeRequired(this Control control, MethodInvoker action)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+    }

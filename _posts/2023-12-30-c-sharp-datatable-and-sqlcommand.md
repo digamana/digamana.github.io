@@ -201,3 +201,139 @@ date: 2023-12-30 20:58 +0800
 		    return lst;
       }
     }
+
+
+## 連線與取得DateTable的Method
+
+
+### Oracle
+示範
+<script  type='text/javascript' src=''>
+
+   public DataTable UseExample(string connStr)
+   {
+       DataTable rtnDT = new DataTable();
+       try
+       {
+           oraclecon = oracleConnetion(connStr);
+           OracleCommand sqlCmdExe = new OracleCommand();
+           string sqlCmd = " SELECT * from demo.user M where  M.DateTimes = :DATES";
+           sqlCmdExe.CommandText = sqlCmd;
+           sqlCmdExe.Parameters.Add(":DATES", OracleType.DateTime).Value = System.DateTime.Now.AddDays(-9).ToString("yyyy/MM/dd");
+          
+           rtnDT = DBReader(oraclecon, sqlCmdExe);
+           rtnDT.TableName = "useDT";
+
+       }
+       catch (Exception ex)
+       {
+           Program._publicFun.logWriteCenter("getDBDataSend", ex);
+       }
+       return rtnDT;
+   }
+
+    public OracleConnection oracleConnetion(string DataSource)
+    {
+        OracleConnection oracleConn = new OracleConnection();
+        oracleConn.ConnectionString = DataSource;
+        try
+        {
+            oracleConn.Open();
+            return oracleConn;
+
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+    }
+	  /// <summary>
+    /// 取得DB資料,使用 OracleConnection 
+    /// </summary>
+    /// <param name="DBConn">OracleConnection物件</param>
+    /// <param name="sqlStr">SQL Command指令</param>
+    /// <returns>DataTable</returns>
+	  public DataTable DBReader(OracleConnection DBConn, OracleCommand DBCommand)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            DBConn.Open();
+            DBCommand.Connection = DBConn;
+            dt.Load(DBCommand.ExecuteReader());
+            DBConn.Close();
+        }
+        catch (Exception ex)
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            string sqlcmd = DBCommand.CommandText;
+        }
+        return dt;
+    }
+
+
+
+### Mssql
+示範
+<script  type='text/javascript' src=''>
+
+
+    public DataTable UserExample(string connStr)
+		{
+			DataTable rtnDT = new DataTable();
+			try
+			{
+				var conn = sqlConnetion(connStr);
+				SqlCommand sqlCmdExe = new SqlCommand();
+				string sqlCmd = string.Empty;
+				sqlCmd = $@" Select * from Demo where test = @DateString ";
+        string formattedDate= "demoArgs";              
+
+				sqlCmdExe.CommandText = sqlCmd;
+				sqlCmdExe.Parameters.Add("@DateString", SqlDbType.VarChar).Value = formattedDate;
+				 
+				rtnDT = DBReader(conn, sqlCmdExe);
+				rtnDT.TableName = $"useDT";
+
+			}
+			catch (Exception ex)
+			{
+				Program._publicFun.logWriteCenter("getDBDataSend", ex);
+			}
+			return rtnDT;
+		}
+	  public SqlConnection sqlConnetion(string connStr)
+	  {
+		  SqlConnection sqlConnection = new SqlConnection();
+		  sqlConnection.ConnectionString = connStr;
+		  try
+		  {
+			  sqlConnection.Open();
+			  return sqlConnection;
+		  }
+		  catch
+		  {
+			  return null;
+		  }
+	  }
+
+    public DataTable DBReader(SqlConnection DBConn, SqlCommand DBCommand)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            DBConn.Open();
+            DBCommand.Connection = DBConn;
+            dt.Load(DBCommand.ExecuteReader());
+            DBConn.Close();
+        }
+        catch (Exception ex)
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            string sqlcmd = DBCommand.CommandText;
+        }
+        return dt;
+    }
