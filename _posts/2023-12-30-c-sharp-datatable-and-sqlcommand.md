@@ -338,3 +338,318 @@ date: 2023-12-30 20:58 +0800
         }
         return dt;
     }
+
+
+
+## 批次插入
+
+### Oracle
+
+Oracle 要安裝套件Oracle.ManagedDataAccess
+<script  type='text/javascript' src=''>
+
+    Install-Package Oracle.ManagedDataAccess -Version 21.14.0
+
+
+示範
+<script  type='text/javascript' src=''>
+
+    public void WriteToServer( OracleConnection oracleConnection, string qualifiedDBName, DataTable dataTable )
+    {
+     try
+     {
+       using ( OracleBulkCopy bulkCopy = new OracleBulkCopy( oracleConnection ) )
+       {
+         bulkCopy.DestinationTableName = qualifiedDBName;
+         bulkCopy.WriteToServer( dataTable );
+       }
+     }
+     catch ( Exception exc )
+     {
+      LogException( exc, MethodBase.GetCurrentMethod( ) );
+      throw;
+     }
+    }
+
+
+### Mssql
+
+示範
+<script  type='text/javascript' src=''>
+
+    using (var tx = new TransactionScope())
+    {
+        using (var sql = new SqlConnection(ConnectionString))
+        {
+            sql.Open();
+
+            using (var sqlBulkCopy = new SqlBulkCopy(sql))
+            {
+                sqlBulkCopy.DestinationTableName = "dbo.TableTable";
+                sqlBulkCopy.WriteToServer(dt);
+            }
+        }
+
+        tx.Complete();
+    }
+
+
+
+## 快速產生Excel報表懶人包
+
+### Oracle連線套件
+安裝
+<script  type='text/javascript' src=''>
+
+    NuGet\Install-Package System.Data.OracleClient -Version 1.0.8
+
+### Excel套件NPOI
+
+安裝
+<script  type='text/javascript' src=''>
+
+    Install-Package NPOI -Version 2.7.0
+
+
+### Main
+如下
+<script  type='text/javascript' src=''>
+
+    test
+
+
+### Method
+如下
+<script  type='text/javascript' src=''>
+
+    #region 資料庫SQL讀取
+
+    public DataTable DemoOracle(string connStr, DateTime StrDate)
+    {
+        DataTable rtnDT = new DataTable();
+        try
+        {
+            oraclecon = dbObj.oracleConnetion(connStr);
+            OracleCommand sqlCmdExe = new OracleCommand();
+            string sqlCmd = @"";
+            sqlCmdExe.CommandText = sqlCmd;
+            sqlCmdExe.Parameters.Add(":PI_DATES", OracleType.DateTime).Value = StrDate;
+            rtnDT = dbObj.DBReader(oraclecon, sqlCmdExe);
+            rtnDT.TableName = "useDT";
+        }
+        catch (Exception ex)
+        {
+            Program._publicFun.logWriteCenter("MethodName", ex);
+        }
+        return rtnDT;
+    }
+
+    public DataTable DemoMssql(string connStr, string StrDate)
+    {
+        DataTable rtnDT = new DataTable(); ;
+        try
+        {
+            conn = dbObj.sqlConnetion(connStr);
+            SqlCommand sqlCmdExe = new SqlCommand();
+            string sqlCmd = @"";
+            //sqlCmdExe.Parameters.Add("@StrDate", SqlDbType.VarChar, 8).Value = StrDate; //Ex:20240324
+            sqlCmdExe.CommandText = sqlCmd;
+            rtnDT = dbObj.DBReader(conn, sqlCmdExe);
+            rtnDT.TableName = "useDT";
+        }
+        catch (Exception ex)
+        {
+            Program._publicFun.logWriteCenter("MethodName", ex);
+        }
+        return rtnDT;
+    }
+
+    #endregion 資料庫SQL讀取
+    #region 資料庫讀取
+    #region Oralce
+    /// <summary>
+    /// 取得DB資料,使用 OracleConnection 
+    /// </summary>
+    /// <param name="DBConn">OracleConnection物件</param>
+    /// <param name="sqlStr">SQL Command指令</param>
+    /// <returns>DataTable</returns>
+    public DataTable DBReader(OracleConnection DBConn, OracleCommand DBCommand)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            DBConn.Open();
+            DBCommand.Connection = DBConn;
+            dt.Load(DBCommand.ExecuteReader());
+            DBConn.Close();
+        }
+        catch (Exception ex)
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            string sqlcmd = DBCommand.CommandText;
+        }
+        return dt;
+    }
+    #endregion Oralce
+    #region Mssql
+    public DataTable DBReader(SqlConnection DBConn, SqlCommand DBCommand)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            DBConn.Open();
+            DBCommand.Connection = DBConn;
+            dt.Load(DBCommand.ExecuteReader());
+            DBConn.Close();
+        }
+        catch (Exception ex)
+        {
+            if (DBConn.State == ConnectionState.Open) DBConn.Close();
+            string sqlcmd = DBCommand.CommandText;
+        }
+        return dt;
+    }
+    #endregion Mssql
+    #endregion 資料庫操作
+    #region 建立Excel
+    public bool CreateExcelFromDataSet(DataSet dataSet, string filePath)
+    {
+        bool result = true;
+        try
+        {
+            IWorkbook workbook = new XSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("Sheet1");
+            int rowIndex = 0;
+            foreach (DataTable dataTable in dataSet.Tables)
+            {
+                IRow titleRow = sheet.CreateRow(rowIndex);
+                titleRow.Height = 30 * 20;
+                ICell titleCell = titleRow.CreateCell(0);
+                titleCell.SetCellValue($"{dataTable.TableName}");
+                titleCell.CellStyle = GetTitleCellStyle(workbook);
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(rowIndex, rowIndex, 0, dataTable.Columns.Count - 1));
+                SetBorderForMergedCells(sheet, rowIndex, 0, dataTable.Columns.Count);
+                rowIndex++;
+                IRow headerRow = sheet.CreateRow(rowIndex);
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    ICell cell = headerRow.CreateCell(column.Ordinal);
+                    cell.SetCellValue(column.ColumnName);
+                    cell.CellStyle = GetHeaderCellStyle(workbook);
+                }
+                SetBorderForCells(headerRow, dataTable.Columns.Count);
+                rowIndex++;
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    IRow dataRow = sheet.CreateRow(rowIndex);
+                    foreach (DataColumn column in dataTable.Columns)
+                    {
+                        ICell cell = dataRow.CreateCell(column.Ordinal);
+                        cell.SetCellValue(row[column].ToString());
+                        cell.CellStyle = GetDataCellStyle(workbook);
+                    }
+                    SetBorderForCells(dataRow, dataTable.Columns.Count); // 设置数据单元格的边框
+                    rowIndex++;
+                }
+                rowIndex++;
+            }
+            using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                workbook.Write(fs);
+            }
+        }
+        catch (Exception ex)
+        {
+            result = false;
+        }
+        return result;
+    }
+
+    private ICellStyle GetTitleCellStyle(IWorkbook workbook)
+    {
+        ICellStyle cellStyle = workbook.CreateCellStyle();
+        cellStyle.Alignment = HorizontalAlignment.Center;
+        cellStyle.VerticalAlignment = VerticalAlignment.Center;
+
+        //   RGB (255, 242, 204)
+        cellStyle.FillForegroundColor = IndexedColors.Gold.Index;
+        cellStyle.FillPattern = FillPattern.SolidForeground;
+        cellStyle.BorderBottom = BorderStyle.Thin;//設定框限線
+        cellStyle.BorderTop = BorderStyle.Thin;
+        cellStyle.BorderLeft = BorderStyle.Thin;
+        cellStyle.BorderRight = BorderStyle.Thin;
+        IFont font = workbook.CreateFont();
+        font.FontHeightInPoints = 16;
+        font.Boldweight = (short)FontBoldWeight.Bold;
+        cellStyle.SetFont(font);
+        return cellStyle;
+    }
+
+    private ICellStyle GetHeaderCellStyle(IWorkbook workbook)
+    {
+        ICellStyle cellStyle = workbook.CreateCellStyle();
+        cellStyle.Alignment = HorizontalAlignment.Center;
+        cellStyle.VerticalAlignment = VerticalAlignment.Center;
+        cellStyle.BorderBottom = BorderStyle.Thin;
+        cellStyle.BorderTop = BorderStyle.Thin;
+        cellStyle.BorderLeft = BorderStyle.Thin;
+        cellStyle.BorderRight = BorderStyle.Thin;
+        IFont font = workbook.CreateFont();
+        font.Boldweight = (short)FontBoldWeight.Bold;
+        cellStyle.SetFont(font);
+        return cellStyle;
+    }
+
+    private ICellStyle GetDataCellStyle(IWorkbook workbook)
+    {
+        ICellStyle cellStyle = workbook.CreateCellStyle();
+        cellStyle.Alignment = HorizontalAlignment.Left;
+        cellStyle.VerticalAlignment = VerticalAlignment.Center;
+        cellStyle.BorderBottom = BorderStyle.Thin;
+        cellStyle.BorderTop = BorderStyle.Thin;
+        cellStyle.BorderLeft = BorderStyle.Thin;
+        cellStyle.BorderRight = BorderStyle.Thin;
+        return cellStyle;
+    }
+
+    private void SetBorderForCells(IRow row, int columnCount)
+    {
+        for (int i = 0; i < columnCount; i++)
+        {
+            ICell cell = row.GetCell(i) ?? row.CreateCell(i);
+            ICellStyle cellStyle = cell.CellStyle;
+            if (cellStyle == null)
+            {
+                cellStyle = row.Sheet.Workbook.CreateCellStyle();
+            }
+
+            cellStyle.BorderBottom = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+
+            cell.CellStyle = cellStyle;
+        }
+    }
+    private void SetBorderForMergedCells(ISheet sheet, int rowIndex, int columnIndex, int columnCount)
+    {
+        for (int i = 0; i < columnCount; i++)
+        {
+            ICell cell = sheet.GetRow(rowIndex).GetCell(columnIndex + i) ?? sheet.GetRow(rowIndex).CreateCell(columnIndex + i);
+            ICellStyle cellStyle = cell.CellStyle;
+            if (cellStyle == null)
+            {
+                cellStyle = sheet.Workbook.CreateCellStyle();
+            }
+
+            cellStyle.BorderBottom = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+
+            cell.CellStyle = cellStyle;
+        }
+    }
+    #endregion 建立Excel

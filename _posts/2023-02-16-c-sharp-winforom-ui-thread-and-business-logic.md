@@ -96,3 +96,32 @@ Sol:
             }
         }
     }
+
+
+## BackgroundWorker執行時更新UI控件的靜態擴展(WPF版本)
+
+使用方式
+<script  type='text/javascript' src=''>
+
+    private void UpdateProgress(string message)
+    {
+        ProgressLabel.InvokeIfNeeded(() => ProgressLabel.Content = message);
+    }
+
+
+
+
+Sol:
+<script  type='text/javascript' src=''>
+
+    public static void InvokeIfNeeded(this Control control, Action action)
+    {
+        if (control.Dispatcher.CheckAccess())
+        {
+            action();
+        }
+        else
+        {
+            control.Dispatcher.Invoke(action);
+        }
+    }
