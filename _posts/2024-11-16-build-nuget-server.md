@@ -4,7 +4,110 @@ title: 建立私人Nuget Server
 date: 2024-11-16 23:02 +0800
 ---
 
-## 前置條件
+## Windos本機使用docker建立Nuget Server
+
+### 使用docker建立Server
+
+<p>
+先在任意路徑建立yml檔 ，內容如圖
+
+內容中的ApiKey很重要
+
+port指的是docker內的80 port 對應到 電腦本機的5555 port 反正只是demo
+
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/51.png){: width="400" height="300" }
+
+
+
+<p>
+yml檔  建完之後
+docker-compose up –d
+這是指令啟動容器
+(映像檔 不存在會建立)
+總之我們這指令做的事是 建立映像檔 並啟動
+
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/52.png){: width="400" height="300" }
+
+
+<p>
+下完指令後
+用桌面板docker檢查
+確實是已經啟動了
+
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/53.png){: width="400" height="300" }
+
+
+
+
+
+<p>
+Docker啟動後
+我們本地端的5555 port 網頁是長這樣
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/54.png){: width="400" height="300" }
+
+### 建立demo用的dll
+<p>
+使用.net 6的來建立一個簡單的dll
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/55.png){: width="400" height="300" }
+
+
+
+### 產出nupkg檔並上傳到Nuget Server
+<p>
+方案1:切到專案檔(csproj)目錄底下，使用指令產生nupkg檔
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/56.png){: width="400" height="300" }
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/58.png){: width="400" height="300" }
+
+
+
+<p>
+方案2:使用Visual Studio 來產生nupkg檔
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/57.png){: width="400" height="300" }
+
+
+
+<p>
+ 產生nupkg檔後，使用指令上傳nupkg檔上傳到Nuget Server
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/59.png){: width="400" height="300" }
+
+
+<p>
+ 上傳成功後的畫面
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/62.png){: width="400" height="300" }
+
+### Visual Studio設置私人Nuget Server並使用
+<p>
+  切到Upload頁面，複製其網址
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/61.png){: width="400" height="300" }
+
+
+<p>
+  開啟新專案，並切到nuget設定的地方，新增nuget來源
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/62.png){: width="400" height="300" }
+
+
+<p>
+  要引用私人Nuget Server的套件時，記得要切換到私人Nuget Server的來源
+</p>
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/63.png){: width="400" height="300" }
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/64.png){: width="400" height="300" }
+![Desktop View](/assets/img/2024-11-16-build-nuget-server/65.png){: width="400" height="300" }
+
+
+## Windos本機建立Nuget Server
+
+### 前置條件
 
 1.下載Nuget.exe
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/10.png){: width="400" height="300" }
@@ -22,7 +125,7 @@ nuget
 ```
 如
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/12.png){: width="400" height="300" }
-## 1.建立Nuget Server專案
+### 1.建立Nuget Server專案
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/1.png){: width="400" height="300" }
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/2.png){: width="400" height="300" }
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/3.png){: width="400" height="300" }
@@ -31,11 +134,11 @@ nuget
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/6.png){: width="400" height="300" }
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/7.png){: width="400" height="300" }
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/8.png){: width="400" height="300" }
-## 2.建立建立範例DLL
+### 2.建立建立範例DLL
 ![Desktop View](/assets/img/2024-11-16-build-nuget-server/9.png){: width="400" height="300" }
 
 
-## 3.處理Dll與Nuget Server
+### 3.處理Dll與Nuget Server
 
 
 1.手動建立副檔名為nuspec的文件
@@ -86,7 +189,7 @@ $hash = Get-FileHash -Path "TestNugetLib.1.0.0.nupkg" -Algorithm SHA512
 ![Desktop View](/assets/img/2024-11-17-build-nuget-server/18.png){: width="400" height="300" }
 
 
-## 3.一般User在
+### 3.一般User在
 
 開啟工具->選項
 ![Desktop View](/assets/img/2024-11-17-build-nuget-server/19.png){: width="400" height="300" }
