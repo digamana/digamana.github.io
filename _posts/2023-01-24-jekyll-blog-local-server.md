@@ -181,7 +181,7 @@ Compose.yml
 可複製
 <script  type='text/javascript' src=''>
 
-    pqc91077/jekyll-github-pages-theme-chirpy:latest
+    docker run --rm -it -v "${PWD}:/srv/jekyll" -p 4000:4000 pqc91077/jekyll-github-pages-theme-chirpy:latest bash -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling"
 
 
 ### 方案2.直接進行DockerFile安裝
